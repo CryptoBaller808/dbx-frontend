@@ -1,0 +1,384 @@
+.MainAnalytics2 {
+  padding: 30px 0px;
+}
+
+.rowana22 {
+  background: #ffffff;
+  padding: 2rem;
+  box-shadow: 0px 27px 65px rgba(65, 62, 62, 0.08);
+  border-radius: 10px;
+  width: 30rem;
+  height: 16.4rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.rowana223 {
+  background: #ffffff;
+  padding: 2rem;
+  box-shadow: 0px 27px 65px rgba(65, 62, 62, 0.08);
+  border-radius: 10px;
+  width: 30rem;
+  height: 16.4rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.frame {
+  position: absolute;
+  width: 20rem;
+  margin-top: -3.3rem;
+  margin-left: 8rem;
+  border-radius: 10px 0px;
+}
+.frame22 {
+  position: absolute;
+  width: 20rem;
+  margin-top: -3.3rem;
+  margin-left: 8rem;
+  border-radius: 10px 0px;
+}
+.frame1 {
+  position: absolute;
+  margin-top: -4.8rem;
+  margin-left: 16.2rem;
+  width: 10rem;
+}
+
+.calen {
+  display: flex;
+  margin-top: 0.3rem;
+}
+.newtext {
+  font-size: 2rem;
+  color: #14192d;
+}
+.dbxtext {
+  font-size: 1.5rem;
+  color: #8f8f8f;
+}
+
+.jantext {
+  font-size: 1rem;
+  color: #4b9a2a;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+}
+.jantext1 {
+  font-size: 1rem;
+  color: #a439b5;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+}
+.jantext2 {
+  font-size: 1rem;
+  color: #031ca0;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+}
+.jantext3 {
+  font-size: 1rem;
+  color: #031ca0;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+}
+.center {
+  display: flex !important;
+  justify-content: space-evenly !important;
+  align-items: center !important;
+}
+.center22 {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+@media only screen and (max-width: 1440px) {
+  .rowana22 {
+    background: #ffffff;
+    padding: 2rem;
+    box-shadow: 0px 27px 65px rgba(65, 62, 62, 0.08);
+    border-radius: 10px;
+    width: 27.5rem;
+    height: 12rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .rowana223 {
+    background: #ffffff;
+    padding: 2rem;
+    box-shadow: 0px 27px 65px rgba(65, 62, 62, 0.08);
+    border-radius: 10px;
+    width: 27.5rem;
+    height: 12rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .frame {
+    position: absolute;
+    width: 15.5rem;
+    margin-top: -4rem;
+    margin-left: 10rem;
+    border-radius: 10px 0px;
+  }
+  .frame22 {
+    position: absolute;
+    width: 15.5rem;
+    margin-top: -4rem;
+    margin-left: 10rem;
+    border-radius: 10px 0px;
+  }
+  .frame1 {
+    position: absolute;
+    margin-top: -4.7rem;
+    margin-left: 15.2rem;
+    width: 8rem;
+  }
+  .newtext {
+    font-size: 1.5rem;
+    color: #14192d;
+  }
+  .dbxtext {
+    font-size: 1rem;
+    color: #8f8f8f;
+  }
+  .jantext {
+    font-size: 0.7rem;
+    color: #4b9a2a;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .jantext1 {
+    font-size: 0.7rem;
+    color: #a439b5;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .jantext2 {
+    font-size: 0.7rem;
+    color: #031ca0;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .jantext3 {
+    font-size: 0.7rem;
+    color: #031ca0;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .rowana22 {
+    background: #ffffff;
+    padding: 2rem;
+    box-shadow: 0px 27px 65px rgba(65, 62, 62, 0.08);
+    border-radius: 10px;
+    width: 20.5rem;
+    height: 10.4rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .rowana223 {
+    background: #ffffff;
+    padding: 2rem;
+    box-shadow: 0px 27px 65px rgba(65, 62, 62, 0.08);
+    border-radius: 10px;
+    width: 20.5rem;
+    height: 10.4rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .frame {
+    position: absolute;
+    width: 12.5rem;
+    margin-top: -4rem;
+    margin-left: 6rem;
+    border-radius: 10px 0px;
+  }
+  .frame22 {
+    position: absolute;
+    width: 12.5rem;
+    margin-top: -4rem;
+    margin-left: 6rem;
+    border-radius: 10px 0px;
+  }
+  .frame1 {
+    position: absolute;
+    margin-top: -4.8rem;
+    margin-left: 10.2rem;
+    width: 6.5rem;
+  }
+  .newtext {
+    font-size: 1.5rem;
+    color: #14192d;
+  }
+  .dbxtext {
+    font-size: 1rem;
+    color: #8f8f8f;
+  }
+  .jantext {
+    font-size: 0.7rem;
+    color: #4b9a2a;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .jantext1 {
+    font-size: 0.7rem;
+    color: #a439b5;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .jantext2 {
+    font-size: 0.7rem;
+    color: #031ca0;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .jantext3 {
+    font-size: 0.7rem;
+    color: #031ca0;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .rowana22 {
+    background: #ffffff;
+    padding: 2rem;
+    box-shadow: 0px 27px 65px rgba(65, 62, 62, 0.08);
+    border-radius: 10px;
+    width: 25.5rem;
+    height: 13.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .rowana223 {
+    background: #ffffff;
+    padding: 2rem;
+    box-shadow: 0px 27px 65px rgba(65, 62, 62, 0.08);
+    border-radius: 10px;
+    width: 25.5rem;
+    height: 13.4rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .frame {
+    position: absolute;
+    width: 15.5rem;
+    margin-top: -3.3rem;
+    margin-left: 8rem;
+    border-radius: 10px 0px;
+  }
+  .frame22 {
+    position: absolute;
+    width: 15.5rem;
+    margin-top: -3.3rem;
+    margin-left: 8rem;
+    border-radius: 10px 0px;
+  }
+  .frame1 {
+    position: absolute;
+    margin-top: -3.4rem;
+    margin-left: 13.5rem;
+    width: 7rem;
+  }
+  .newtext {
+    font-size: 1.5rem;
+    color: #14192d;
+  }
+  .dbxtext {
+    font-size: 1rem;
+    color: #8f8f8f;
+  }
+  .jantext {
+    font-size: 0.7rem;
+    color: #4b9a2a;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .jantext1 {
+    font-size: 0.7rem;
+    color: #a439b5;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .jantext2 {
+    font-size: 0.7rem;
+    color: #031ca0;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .jantext3 {
+    font-size: 0.7rem;
+    color: #031ca0;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+}
+@media only screen and (max-width: 510px) {
+  .MainAnalytics2 {
+    margin-bottom: -9rem;
+  }
+  .rowana22 {
+    background: #ffffff;
+    padding: 2rem;
+    box-shadow: 0px 27px 65px rgba(65, 62, 62, 0.08);
+    border-radius: 10px;
+    width: 28.5rem;
+    height: 14.3rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .rowana223 {
+    display: none;
+  }
+  .frame {
+    position: absolute;
+    width: 20rem;
+    margin-top: -6rem;
+    margin-left: 6.5rem;
+    border-radius: 10px 0px;
+  }
+  .frame22 {
+    position: absolute;
+    width: 20.1rem;
+    margin-top: -6rem;
+    margin-left: 6.5rem;
+    border-radius: 10px 0px;
+  }
+  .frame1 {
+    position: absolute;
+    margin-top: -6.8rem;
+    margin-left: 13.3rem;
+    width: 10rem;
+  }
+  .newtext {
+    font-size: 2rem;
+    color: #14192d;
+  }
+  .dbxtext {
+    font-size: 1.5rem;
+    color: #8f8f8f;
+  }
+  .jantext {
+    font-size: 1.1rem;
+    color: #4b9a2a;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .jantext1 {
+    font-size: 1.1rem;
+    color: #a439b5;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .jantext2 {
+    font-size: 0.7rem;
+    color: #031ca0;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .jantext3 {
+    font-size: 0.7rem;
+    color: #031ca0;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+}

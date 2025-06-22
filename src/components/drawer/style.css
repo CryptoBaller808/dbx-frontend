@@ -1,0 +1,24 @@
+.ant-drawer-body {
+  background-color: #002244;
+  color: #fff;
+  height: calc(100vh - 55px);
+}
+
+.ant-drawer-header {
+  background-color: #002244 !important;
+  color: #fff !important;
+}
+.anticon {
+  color: white !important;
+  position: absolute;
+  margin-left: 40rem;
+}
+.divddlog {
+  display: flex;
+
+  align-items: center;
+}
+.butext {
+  margin-left: 0.8rem;
+  margin-top: 1rem;
+}

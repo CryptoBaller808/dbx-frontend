@@ -1,0 +1,29 @@
+.confirmBtn {
+  background: linear-gradient(48.98deg, rgba(167, 214, 63, 0.9) -34.08%, #39b54a 44.93%, #9fd340 126.52%);
+  border-radius: 1rem;
+  width: 100%;
+  color: #fff;
+  font-size: 1.8rem;
+  margin-top: 5rem;
+  padding: 1rem;
+  border: none;
+}
+.confirmBtn:disabled {
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+.privateKey {
+  display: grid;
+  gap: 1rem;
+}
+
+.privateKey input {
+  border: 2px solid lightslategray;
+  border-radius: .5em;
+  padding: .2em .5em;
+}
+
+.privateKey p {
+    font-size: 1.1rem;
+}

@@ -1,0 +1,55 @@
+.min-h-screen {
+  /* height: auto;
+  width: 100%;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center !important; */
+}
+
+.Maincrypto666 > div {
+  width: 100%;
+}
+video.mainVideo {
+  width: 100%;
+}
+.avil-wallet p.lbl.flex.aic span {
+  position: absolute;
+  font-size: 11px;
+  color: red;
+  bottom: -17px;
+  right: -7px;
+}
+
+.avil-wallet p.lbl.flex.aic {
+  position: relative;
+}
+.wallet-connect .wrap .desc.headss{
+  font-family: "Sofia Pro";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 18px;
+  text-align: left;
+  color: #333539;
+}
+p.note {
+  font-size: 12px;
+  text-align: left;
+  color: #959595;
+}
+
+/* html {
+  font-size: 62.5%;
+} */
+
+@media (max-width: 998px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 45%;
+  }
+}

@@ -1,0 +1,286 @@
+/* MFA Setup Modal Styles */
+.mfa-setup-modal .ant-modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-bottom: none;
+}
+
+.mfa-setup-modal .ant-modal-title {
+  color: white;
+  font-weight: 600;
+}
+
+.mfa-setup-modal .ant-modal-close {
+  color: white;
+}
+
+.mfa-setup-modal .ant-modal-close:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.mfa-modal-header {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.mfa-setup-content {
+  padding: 8px 0;
+}
+
+.mfa-loading {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.mfa-setup-step {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mfa-qr-section {
+  text-align: center;
+}
+
+.mfa-qr-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin: 16px 0;
+  border: 2px dashed #d9d9d9;
+}
+
+.mfa-secret-container {
+  margin: 16px 0;
+}
+
+.mfa-secret-input {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.mfa-verification-section {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 24px;
+}
+
+.mfa-step-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.mfa-backup-codes-step {
+  text-align: center;
+}
+
+.mfa-success-header {
+  margin-bottom: 24px;
+}
+
+.mfa-backup-codes-container {
+  text-align: left;
+}
+
+.mfa-backup-codes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 16px 0;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e8e8e8;
+}
+
+.mfa-backup-code {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #d9d9d9;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
+.code-number {
+  color: #666;
+  margin-right: 8px;
+  min-width: 20px;
+}
+
+.code-value {
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #1890ff;
+}
+
+.mfa-backup-actions {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+/* MFA Verification Modal Styles */
+.mfa-verify-modal .ant-modal-header {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  border-bottom: none;
+}
+
+.mfa-verify-modal .ant-modal-title {
+  color: white;
+  font-weight: 600;
+}
+
+.mfa-verify-modal .ant-modal-close {
+  color: white;
+}
+
+.mfa-verify-content {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.mfa-verify-input {
+  margin: 20px 0;
+}
+
+.mfa-verify-input input {
+  text-align: center;
+  font-size: 24px;
+  letter-spacing: 8px;
+  font-weight: 600;
+}
+
+.mfa-recovery-section {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.mfa-recovery-toggle {
+  color: #1890ff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.mfa-recovery-toggle:hover {
+  color: #40a9ff;
+}
+
+/* MFA Settings Styles */
+.mfa-settings-card {
+  margin-bottom: 16px;
+}
+
+.mfa-status-enabled {
+  color: #52c41a;
+}
+
+.mfa-status-disabled {
+  color: #ff4d4f;
+}
+
+.mfa-settings-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.mfa-info-section {
+  background: #f6ffed;
+  border: 1px solid #b7eb8f;
+  border-radius: 6px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.mfa-warning-section {
+  background: #fff7e6;
+  border: 1px solid #ffd591;
+  border-radius: 6px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mfa-setup-modal {
+    margin: 0;
+    max-width: 100vw;
+  }
+  
+  .mfa-setup-step {
+    gap: 16px;
+  }
+  
+  .mfa-backup-codes-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .mfa-qr-container svg {
+    width: 160px !important;
+    height: 160px !important;
+  }
+  
+  .mfa-step-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .mfa-step-actions button {
+    width: 100%;
+  }
+}
+
+/* Animation for success state */
+@keyframes mfa-success-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.mfa-success-header .anticon {
+  animation: mfa-success-pulse 2s ease-in-out;
+}
+
+/* Loading animation */
+@keyframes mfa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.mfa-loading .anticon {
+  animation: mfa-spin 1s linear infinite;
+}
+
+/* QR Code hover effect */
+.mfa-qr-container:hover {
+  border-color: #1890ff;
+  background: #f0f8ff;
+  transition: all 0.3s ease;
+}
+
+/* Backup code hover effect */
+.mfa-backup-code:hover {
+  border-color: #1890ff;
+  box-shadow: 0 2px 4px rgba(24, 144, 255, 0.1);
+  transition: all 0.2s ease;
+}
+

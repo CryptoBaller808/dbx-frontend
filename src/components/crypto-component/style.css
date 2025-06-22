@@ -1,0 +1,73 @@
+.Maincrypto666 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mainimg {
+  width: 100%;
+}
+/* .mainimg2 {
+  display: none !important;
+} */
+.crytotext {
+  color: #14192d;
+  font-weight: 300;
+  font-size: 6rem;
+  line-height: 2;
+}
+
+.crytotext1 {
+  color: #14192d;
+  font-weight: bold;
+  font-size: 6rem;
+  margin-top: -0.8rem;
+}
+
+.dollarimg {
+  width: 50rem;
+  z-index: 2;
+}
+
+.mainimg {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.crytotext2 {
+  color: #333539;
+  font-size: 2.7rem;
+  line-height: 1.5;
+}
+
+.crytoinput {
+  width: 28rem;
+  padding: 1.4rem;
+  border: 1px solid #2e6029;
+  border-radius: 3rem;
+  color: #73845d;
+  font-size: 1.5rem !important;
+  background-color: #e9f4d0;
+  margin-left: -2rem;
+}
+
+.getbtn {
+  width: 14rem;
+  background: linear-gradient(
+    48.98deg,
+    rgba(167, 214, 63, 0.9) -34.08%,
+    #39b54a 44.93%,
+    #9fd340 126.52%
+  );
+  border-radius: 3rem;
+  padding: 1.4rem;
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.framepic {
+  position: absolute;
+  z-index: 1;
+  width: 55rem;
+}

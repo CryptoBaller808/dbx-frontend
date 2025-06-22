@@ -1,0 +1,50 @@
+.privacy-policy-page {
+  min-height: 730px;
+  .wrap {
+    .page_block {
+      padding: 40px 0;
+      width: 100%;
+      .form_block {
+        width: 100%;
+        min-height: 400px;
+        padding: 30px;
+        border-radius: 16px;
+        border: 1px solid #76b91b;
+        box-shadow: 0px 27px 65px 0px rgba(65, 62, 62, 0.08);
+        @media (max-width: 480px) {
+          padding: 16px;
+        }
+        .logo {
+          height: 100px;
+          @media (max-width: 480px) {
+            height: 70px;
+          }
+        }
+        .title {
+          color: #14192d;
+          font-size: 30px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+          text-align: center;
+          @media (max-width: 480px) {
+            font-size: 24px;
+          }
+        }
+        .paragraph {
+          .paragraph-title {
+          }
+          .paragraph-desc {
+            color: #000;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 300;
+            @media (max-width: 480px) {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

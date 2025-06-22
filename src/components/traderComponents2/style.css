@@ -1,0 +1,20 @@
+.firstDivoftradesexchange22 {
+  background-color: #fff;
+  height: 50rem !important;
+  border-radius: 10px !important;
+  padding: 1rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  /* align-items: center !important; */
+  margin-top: 2rem;
+}
+
+.trade22 {
+  margin-left: 1rem;
+}
+
+@media (max-width: 768px) {
+  .trade22 {
+    margin-left: 1.5rem;
+  }
+}

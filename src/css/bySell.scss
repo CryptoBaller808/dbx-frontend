@@ -1,0 +1,98 @@
+.buy-sell {
+  min-height: 730px;
+  .buy-sell-hero-sec {
+    height: 430px;
+    width: 100%;
+    background-image: url("../../public/images/Buy-Sell-Banner.png");
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+    @include media(">=phone", "<=480px") {
+      background-image: url("../../public/images/Buy-Sell-Banner2.png");
+      background-position: center !important;
+      height: calc(100vh - 90px) !important;
+    }
+  }
+  .wrap {
+    .buy-sell-card-block {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 100px;
+      margin: 50px 0;
+      height: 100%;
+      width: 90%;
+      @include media(">=phone", "<=480px") {
+        grid-template-columns: repeat(1, 1fr);
+        width: 100%;
+        grid-gap: 30px;
+      }
+      @include media(">=phone", "<=767px") {
+        grid-template-columns: repeat(1, 1fr);
+        width: 100%;
+      }
+      @media screen and (max-width: 1199px) {
+        width: 100%;
+      }
+      .card {
+        width: 100%;
+        min-height: 460px;
+        padding: 16px;
+        border-radius: 16px;
+        border: 1px solid #76b91b;
+        background: rgba(196, 196, 196, 0.5);
+        box-shadow: 0px 27px 65px 0px rgba(65, 62, 62, 0.08);
+
+        @include media(">=phone", "<=767px") {
+          margin-bottom: 20px;
+        }
+        .img {
+          padding: 20px 0;
+          width: 260px;
+        }
+        .meta {
+          flex: 1;
+          .card-tag {
+            font-weight: 600;
+            font-size: 26px;
+            line-height: 36px;
+            color: #14192d;
+            text-align: center;
+          }
+          .card-desc {
+            // padding: 30px 0;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 28px;
+            text-align: center;
+            color: #3f444d;
+          }
+          .payment-method-logos {
+            .pm-logo {
+              height: 36px;
+              width: 36px;
+            }
+          }
+        }
+        .btn {
+          width: 100%;
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 24px;
+          color: #ffffff;
+          border-radius: 12px;
+        }
+        &:first-child {
+          .img {
+            // height: 120px;
+            padding-top: 40px;
+          }
+        }
+        &:last-child {
+          .img {
+            // height: 160px;
+          }
+        }
+      }
+    }
+  }
+}

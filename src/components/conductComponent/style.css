@@ -1,0 +1,141 @@
+.Mainconduct {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px 0px;
+  background-color: white;
+}
+
+.conducttext {
+  font-size: 5rem;
+  color: #14192d;
+  text-align: center;
+}
+
+.compdiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.compimg {
+  width: 60rem !important;
+  filter: invert(1);
+}
+.dark-mode .compimg {
+  width: 60rem !important;
+  filter: invert(0);
+}
+.bittext {
+  font-size: 1.5rem;
+  color: #333539;
+  font-weight: normal;
+}
+
+.bitdiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.hrbit {
+  width: 28rem;
+}
+
+.applediv {
+  width: 24rem;
+  background: linear-gradient(
+    48.98deg,
+    rgba(167, 214, 63, 0.9) -34.08%,
+    #39b54a 44.93%,
+    #9fd340 126.52%
+  );
+  border-radius: 4rem;
+  margin-bottom: 3rem;
+  margin-left: -4.5rem;
+  margin-top: 2rem;
+}
+
+.downdiv {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.downtext {
+  font-size: 1.1rem;
+  color: #ffffff;
+  font-weight: normal;
+  /*margin-top: 1.2rem;*/
+  margin-bottom: 0.8rem;
+  margin-left: -1rem;
+}
+
+.downtext1 {
+  font-size: 1.4rem;
+  color: #ffffff;
+  font-weight: bold;
+  margin-top: -0.5rem;
+  margin-left: -1rem;
+}
+
+.Androiddiv {
+  width: 24rem;
+  background-color: #f7f7f7;
+  border-radius: 4rem;
+  border: solid 1px #39b54a;
+  margin-left: -4.5rem;
+}
+
+.Androidtext {
+  font-size: 1.3rem;
+  color: #14192d;
+  font-weight: normal;
+  /*margin-top: 1.2rem;*/
+  margin-bottom: 0.5rem;
+  margin-left: -1rem;
+}
+
+.Androidtext1 {
+  font-size: 1.5rem;
+  color: #14192d;
+  font-weight: bold;
+  margin-top: -0.5rem;
+  margin-left: -1rem;
+}
+
+.bitcoll {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column;
+}
+.downdiv {
+  padding: 15px;
+}
+@media (max-width: 510px) {
+  .conducttext {
+    font-size: 4rem;
+    color: #14192d;
+    text-align: center;
+    font-weight: bold;
+  }
+  .compimg {
+    width: 35rem !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .compimg {
+    width: 35rem !important;
+  }
+  .conducttext {
+    font-size: 3.5rem !important;
+    color: #14192d;
+    text-align: center;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,432 @@
+/* Error Handler Component Styles */
+
+.error-handler {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  border-radius: 12px;
+  overflow: hidden;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Severity Variants */
+.error-handler--info {
+  background: var(--info-bg, #ebf8ff);
+  border: 1px solid var(--info-border, #90cdf4);
+  color: var(--info-text, #2b6cb0);
+}
+
+.error-handler--warning {
+  background: var(--warning-bg, #fffbeb);
+  border: 1px solid var(--warning-border, #f6ad55);
+  color: var(--warning-text, #c05621);
+}
+
+.error-handler--error {
+  background: var(--error-bg, #fed7d7);
+  border: 1px solid var(--error-border, #fc8181);
+  color: var(--error-text, #c53030);
+}
+
+/* Inline Variant */
+.error-handler--inline {
+  margin: 16px 0;
+}
+
+.error-handler__content {
+  padding: 16px;
+}
+
+.error-handler__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.error-handler__icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.error-handler__icon--large {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.error-handler__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.error-handler__title {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: inherit;
+}
+
+.error-handler__message {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.error-handler__dismiss {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  color: inherit;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.error-handler__dismiss:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.error-handler__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.error-handler__action {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.error-handler__action--primary {
+  background: var(--primary-color, #3182ce);
+  color: white;
+}
+
+.error-handler__action--primary:hover {
+  background: var(--primary-hover, #2c5282);
+  transform: translateY(-1px);
+}
+
+.error-handler__action--secondary {
+  background: rgba(255, 255, 255, 0.8);
+  color: inherit;
+  border: 1px solid currentColor;
+  opacity: 0.8;
+}
+
+.error-handler__action--secondary:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Modal Variant */
+.error-handler__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.error-handler--modal {
+  background: var(--bg-primary, #ffffff);
+  border: none;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  animation: modalSlideUp 0.3s ease;
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-handler__modal-content {
+  padding: 32px;
+  text-align: center;
+}
+
+.error-handler__modal-header {
+  margin-bottom: 24px;
+}
+
+.error-handler--modal .error-handler__title {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: var(--text-primary, #1a202c);
+}
+
+.error-handler--modal .error-handler__message {
+  font-size: 16px;
+  color: var(--text-secondary, #718096);
+}
+
+.error-handler--modal.error-handler--info .error-handler__title {
+  color: var(--info-color, #3182ce);
+}
+
+.error-handler--modal.error-handler--warning .error-handler__title {
+  color: var(--warning-color, #ed8936);
+}
+
+.error-handler--modal.error-handler--error .error-handler__title {
+  color: var(--error-color, #e53e3e);
+}
+
+.error-handler__network-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-secondary, #f7fafc);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--text-primary, #1a202c);
+  margin-bottom: 24px;
+}
+
+.error-handler__network-icon {
+  font-size: 16px;
+}
+
+.error-handler__modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.error-handler--modal .error-handler__action {
+  padding: 12px 24px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+.error-handler__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--bg-secondary, #f7fafc);
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-secondary, #718096);
+}
+
+.error-handler__close:hover {
+  background: var(--bg-hover, #edf2f7);
+  color: var(--text-primary, #1a202c);
+}
+
+/* Severity-specific icon colors */
+.error-handler--info .error-handler__icon {
+  color: var(--info-color, #3182ce);
+}
+
+.error-handler--warning .error-handler__icon {
+  color: var(--warning-color, #ed8936);
+}
+
+.error-handler--error .error-handler__icon {
+  color: var(--error-color, #e53e3e);
+}
+
+/* Animation for large icons */
+.error-handler__icon--large {
+  animation: iconBounce 0.6s ease;
+}
+
+@keyframes iconBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #1a202c;
+    --bg-secondary: #2d3748;
+    --bg-hover: #4a5568;
+    --text-primary: #f7fafc;
+    --text-secondary: #cbd5e0;
+    --primary-color: #63b3ed;
+    --primary-hover: #4299e1;
+    --info-bg: #1e3a5f;
+    --info-border: #3182ce;
+    --info-color: #63b3ed;
+    --info-text: #90cdf4;
+    --warning-bg: #744210;
+    --warning-border: #ed8936;
+    --warning-color: #f6ad55;
+    --warning-text: #fbd38d;
+    --error-bg: #742a2a;
+    --error-border: #e53e3e;
+    --error-color: #fc8181;
+    --error-text: #feb2b2;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .error-handler__overlay {
+    padding: 16px;
+  }
+  
+  .error-handler--modal {
+    max-width: 100%;
+    border-radius: 16px;
+  }
+  
+  .error-handler__modal-content {
+    padding: 24px;
+  }
+  
+  .error-handler__header {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  
+  .error-handler__text {
+    text-align: center;
+  }
+  
+  .error-handler__dismiss {
+    align-self: center;
+  }
+  
+  .error-handler__actions,
+  .error-handler__modal-actions {
+    flex-direction: column;
+  }
+  
+  .error-handler__action {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .error-handler__icon--large {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .error-handler__modal-content {
+    padding: 20px;
+  }
+  
+  .error-handler--modal .error-handler__title {
+    font-size: 18px;
+  }
+  
+  .error-handler--modal .error-handler__message {
+    font-size: 14px;
+  }
+  
+  .error-handler__network-info {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+}
+
+/* Toast-style positioning for inline errors */
+.error-handler--toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  max-width: 400px;
+  z-index: 1000;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .error-handler--toast {
+    top: 16px;
+    right: 16px;
+    left: 16px;
+    max-width: none;
+  }
+}
+
+/* Accessibility */
+.error-handler[role="alert"] {
+  /* Screen reader announcements */
+}
+
+.error-handler__action:focus,
+.error-handler__dismiss:focus,
+.error-handler__close:focus {
+  outline: 2px solid var(--primary-color, #3182ce);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .error-handler {
+    border-width: 2px;
+  }
+  
+  .error-handler__action {
+    border-width: 2px;
+  }
+}
+

@@ -1,0 +1,393 @@
+.Mainaccount {
+  display: flex;
+  justify-content: center;
+  align-items: "center";
+  padding: 80px 0px;
+  background: linear-gradient(265.73deg, #acd949 9.82%, #9fd340 40.96%, #39b54a 80.16%);
+}
+
+.accounttext {
+  font-size: 3.2rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+.accounttext1 {
+  font-size: 1.6rem;
+  color: #f2f2f2;
+  font-weight: 300;
+  margin-top: 1rem;
+}
+
+.accinputdiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 700px;
+  background: #f2f2f2;
+  box-shadow: 0px 4px 65px rgba(0, 0, 0, 0.05);
+  border: solid 1px white;
+  border-radius: 4rem;
+  padding: 1.1rem;
+  font-size: 1.5rem;
+  color: #87a17c;
+}
+
+/* .addtext {
+  margin-top: 1rem;
+  } */
+/* .addtext1 {
+  margin-top: 0.6rem;
+  } */
+.accsignbtn {
+  /* display: flex;
+  justify-content: center;*/
+  align-items: center;
+  /*width: 14rem;*/
+  text-align: center;
+  /* border-radius: 4rem;
+  padding: 0.5rem;
+  padding-top: 1rem;
+  font-size: 1.5rem;
+  color: #ffffff;
+  background: linear-gradient(
+    48.98deg,
+    rgba(167, 214, 63, 0.9) -34.08%,
+    #39b54a 44.93%,
+    #9fd340 126.52%
+  );*/
+}
+
+/*
+.accountcol {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column;
+}
+
+.accountcol1 {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}*/
+
+.accimg {
+  position: absolute;
+  margin-top: -10rem;
+  right: 0;
+  width: 100vw;
+  height: 22rem;
+}
+
+.accsignbtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 14rem;
+  text-align: center;
+  border-radius: 4rem;
+  padding: 15px;
+  font-size: 1.5rem;
+  color: #ffffff;
+  background: linear-gradient(48.98deg, rgba(167, 214, 63, 0.9) -34.08%, #39b54a 44.93%, #9fd340 126.52%);
+}
+
+.accountcol {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column;
+}
+
+.accountcol1 {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.accimg {
+  position: absolute;
+  margin-top: -10rem;
+  right: 0;
+  width: 100vw;
+  height: 22rem;
+}
+
+@media only screen and (max-width: 1600px) {
+  .accinputdiv {
+    width: 550px;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  h1.accounttext {
+    font-size: 2.3rem;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .Mainaccount h1.accounttext {
+    font-size: 2.3rem;
+  }
+
+  .Mainaccount .ant-row.ant-row-space-between {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .Mainaccount .ant-col {
+    display: block !important;
+    max-width: 100%;
+    padding-bottom: 20px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .exchangetext {
+    font-size: 18px;
+  }
+
+  .Mainaccount h1.accounttext {
+    font-size: 22px;
+  }
+
+  .centerdivana1 h5 {
+    font-size: 20px;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  p.bittext {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .tradetext1 {
+    font-size: 18px;
+    padding: 0 10px;
+  }
+
+  .marg {
+    font-size: 18px;
+  }
+
+  .centerdivana1 {
+    flex-direction: column;
+  }
+
+  .mainbtndivvv button {
+    font-size: 18px;
+    width: auto;
+  }
+
+  .risingdivvv {
+    width: 100%;
+  }
+
+  .mainbtndivvv {
+    width: 100% !important;
+    max-width: 80%;
+  }
+
+  .wrapWidth.wrap.flex.aic {
+    display: block;
+  }
+
+  .footer-pg .wrap .left {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  .footer-pg {
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .Mainaccount .ant-col {
+    width: 100%;
+  }
+
+  .Mainaccount {
+    display: block;
+  }
+
+  .Mainaccount .accinputdiv {
+    max-width: 90%;
+    margin: 0 auto;
+    font-size: 18px;
+    display: flex;
+  }
+
+  .accinputdiv p.addtext1 {
+    font-size: 12px;
+  }
+
+  .accsignbtn {
+    width: 120px;
+  }
+
+  .ant-row .ant-col {
+    width: 100%;
+    flex: 0 0 100%;
+  }
+
+  .ant-row .ant-col {
+    width: 100%;
+    flex: 0 0 100%;
+  }
+
+  .footer-pg .wrapWidth {
+    display: block;
+  }
+
+  .footer-pg .wrapWidth .left.flex-col {
+    justify-content: center;
+    display: flex;
+    width: 100% !important;
+    flex: 0 0 100%;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .footer-pg .wrap .left .social {
+    width: 100% !important;
+    justify-content: center;
+  }
+
+  .footer-pg {
+    height: auto;
+    padding: 20px 30px;
+  }
+
+  .social>.icon:last-child {
+    margin-right: 0 !important;
+  }
+
+  .footer-pg .social {
+    padding-left: 25px;
+  }
+
+  .footer-pg .wrap .right {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-pg .wrap .right .items .tag {
+    margin-bottom: 10px;
+  }
+
+  .footer-pg .wrap .right .items {
+    padding-bottom: 20px;
+  }
+
+  .bitdiv {
+    width: 100%;
+  }
+
+  p.bittext br {
+    display: none;
+  }
+
+  .applediv,
+  .Androiddiv {
+    max-width: 200px;
+    width: 100%;
+    margin: 20px auto 0;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .accountcol1 {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: 2rem;
+  }
+
+  .accounttext1 {
+    font-size: 1.6rem;
+    color: #f2f2f2;
+    font-weight: 300;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .Mainaccount .accinputdiv {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 425px) {
+  .accountcol1 {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: 2rem;
+  }
+
+  .accounttext1 {
+    font-size: 1.6rem;
+    color: #f2f2f2;
+    font-weight: 300;
+    margin-top: 1rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 320px) {
+  .accinputdiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40rem;
+    background: #f2f2f2;
+    box-shadow: 0px 4px 65px rgba(0, 0, 0, 0.05);
+    border: solid 1px white;
+    border-radius: 4rem;
+    padding: 1.2rem;
+    font-size: 1.5rem;
+    color: #87a17c;
+  }
+
+  .accinputdiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40rem;
+    background: #f2f2f2;
+    box-shadow: 0px 4px 65px rgba(0, 0, 0, 0.05);
+    border: solid 1px white;
+    border-radius: 4rem;
+    padding: 1.2rem;
+    font-size: 1.5rem;
+    color: #87a17c;
+  }
+
+  .accimg {
+    position: absolute;
+    margin-top: -5rem;
+    right: 0;
+    width: 80vw;
+    height: 25vh;
+  }
+
+  .subscribed-block {
+    height: 300px;
+    width: 100%;
+    background: linear-gradient(265.73deg, #acd949 9.82%, #9fd340 40.96%, #39b54a 80.16%);
+  }
+
+  .subscribed-block .bg-layer {
+    height: 100%;
+    width: 100%;
+    padding: 60px 0px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center !important;
+  }
+}

@@ -1,0 +1,37 @@
+.tradercompofirstDivoftradesexchange22 {
+  background-color: #fff;
+  height: 102rem !important;
+  border-radius: 10px !important;
+  padding: 1rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.displayflexoftradercomponent22 {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.linediveoo121222 {
+  width: 100%;
+  background-color: #cfd7de;
+  height: 0.1rem;
+  margin-top: 1rem;
+}
+
+.decimal1122 {
+  border-radius: 0.5rem !important;
+}
+
+@media (max-width: 500px) {
+  .menupic22 {
+    width: 3rem;
+  }
+
+  .decimal22 {
+    width: 15rem;
+  }
+}

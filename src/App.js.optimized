@@ -1,0 +1,193 @@
+// Code Splitting Implementation for DigitalBlockExchange Frontend
+import React, { Suspense, lazy, useCallback, useEffect, useMemo, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
+
+import "./App.css";
+import "./css/App.scss";
+
+// Import css files
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
+// Components that should be loaded eagerly (part of the critical path)
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Sidebar from "./components/Sidebar";
+import ThemeSwitch from "./components/theme-switch";
+
+// Loading component for Suspense fallback
+const LoadingFallback = () => (
+  <div className="page-loading">
+    <div className="loading-spinner">
+      <div className="spinner-border text-primary" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+);
+
+// Lazy-loaded components (code-split)
+const LandingPage = lazy(() => import('./Pages/landingPage/LandingPage'));
+const BuySell = lazy(() => import('./Pages/BuySell'));
+const Orders = lazy(() => import('./Pages/orders/Orders'));
+const Main = lazy(() => import('./Pages/Main'));
+const Swap = lazy(() => import('./Pages/Swap'));
+const XLMSwap = lazy(() => import('./Pages/xlm-swap'));
+const Exchange = lazy(() => import('./Pages/Exchange'));
+const EditProfile = lazy(() => import('./Pages/EditProfile'));
+const NftDetail = lazy(() => import('./components/NftDetail'));
+const CreateNft = lazy(() => import('./Pages/CreateNft'));
+const SingleNft = lazy(() => import('./Pages/SingleNft'));
+const CreatedNFT = lazy(() => import('./Pages/CreatedNFT'));
+const CollectionNft = lazy(() => import('./Pages/CollectionNft'));
+const ExplorePage = lazy(() => import('./components/ExplorePage'));
+const Profile = lazy(() => import('./Pages/Profile'));
+const MyNftDetail = lazy(() => import('./Pages/MyNftDetail'));
+const CreateNewItem = lazy(() => import('./components/CreateNewItem'));
+const Resale = lazy(() => import('./Pages/Resale'));
+const ContactUs = lazy(() => import('./Pages/ContactUs'));
+const ListingApplication = lazy(() => import('./Pages/ListingApplication'));
+const PrivacyPolicy = lazy(() => import('./Pages/PrivacyPolicy'));
+
+// Redux imports
+import { useDispatch, useSelector } from "react-redux";
+import { useSocket } from "./context/socket";
+import * as balanceAction from "./redux/xummBalance/action";
+import * as QRCodeAction from "./redux/xummQRCode/action";
+import * as accountOfferAction from "./redux/accountOffers/action";
+import * as historyOfferAction from "./redux/historyOffers/action";
+import { connectWallet, logoutUser } from "./redux/actions";
+import { setNetwork } from "./redux/network/action";
+import handleGoogleAnalytics from "./helper/analytics/analytics";
+
+let timeout = null;
+
+function App() {
+  const [openSidebar, setOpenSidebar] = useState(false);
+  const dispatch = useDispatch();
+  const { isDarkMode } = useSelector(state => state.themeReducer);
+  const balanceData = useSelector(state => state.signInData?.balance);
+  const userToken = useMemo(() => balanceData?.userToken ?? "", [balanceData]);
+  const socket = useSocket();
+  const network = useSelector(state => state.networkReducers.token);
+
+  const gettokenlocalstorage = async () => {
+    let data = JSON.parse(localStorage.getItem("nft_login"));
+    if (!data) return;
+    console.log("login_cred", data);
+    const res2 = await axios.get(`${process.env.REACT_APP_API_URL}/profiles/getuserProfile/${data?.id}`);
+    console.log("res22", res2);
+    if (res2?.data) {
+      dispatch({
+        type: "GET_USER",
+        payload: { ...data, ...res2?.data },
+      });
+    }
+  };
+
+  // Effect to set the class on the body based on the current mode
+  useEffect(() => {
+    const body = document.body;
+    if (isDarkMode) {
+      body.classList.add("dark-mode");
+    } else {
+      body.classList.remove("dark-mode");
+    }
+  }, [isDarkMode]);
+
+  useEffect(() => {
+    gettokenlocalstorage();
+  }, []);
+
+  const walletSync = useCallback(async () => {
+    socket.emit("xlm-fetch-wallet", userToken);
+    socket.on("wallet-updated", args => {
+      dispatch(balanceAction.setBalance(args));
+    });
+  }, [dispatch, socket, userToken]);
+
+  useEffect(() => {
+    timeout = setTimeout(() => walletSync(), 5000);
+
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [dispatch, walletSync]);
+
+  const disconnectWallet = useCallback(() => {
+    dispatch(balanceAction.setBalanceEmpty());
+    dispatch(QRCodeAction.setQRCodeDisconnect());
+    dispatch(connectWallet(false));
+    //clear acc offers content
+    dispatch(accountOfferAction.setAccountOffersProcessing(true));
+    dispatch(accountOfferAction.setAccountOffers([]));
+    dispatch(accountOfferAction.setAccountOffersProcessing(false));
+    //clear history content
+    dispatch(historyOfferAction.setHistoryOffersProcessing());
+    dispatch(historyOfferAction.setHistoryOffers([]));
+    dispatch(historyOfferAction.setStopHistoryOffersProcessing());
+    localStorage.removeItem("nft_login");
+    dispatch(logoutUser());
+  }, [dispatch]);
+
+  const handleMenuClick = useCallback(
+    selected => {
+      disconnectWallet();
+      dispatch(setNetwork(selected.value));
+      setOpenSidebar(false);
+    },
+    [disconnectWallet, dispatch],
+  );
+   
+  useEffect(() => {
+    handleGoogleAnalytics("G-Y7JFCH1TE5")
+  }, []);
+  
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <ToastContainer />
+        <Header openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} setSelectedToken={handleMenuClick} />
+        <Sidebar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
+        
+        {/* Wrap Routes with Suspense for code splitting */}
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            <Route path="/" element={<LandingPage />} exact />
+            <Route path="/buysell" element={<BuySell />} exact />
+            <Route path="/orders/*" element={<Orders />} exact />
+            <Route path="/nft" element={<Main />} exact />
+            <Route path="/swap" element={network === "xlm" ? <XLMSwap /> : <Swap />} exact />
+            <Route path="/exchange" element={<Exchange isDarkMode={isDarkMode} />} exact />
+            <Route path="/profile-edit" element={<EditProfile />} exact />
+            <Route path="/nft-detail" element={<NftDetail />} exact />
+            <Route path="/nft-create" element={<CreateNft />} exact />
+            <Route path="/single-create" element={<SingleNft />} exact />
+            <Route path="/creatednft/:id" element={<CreatedNFT />} exact />
+            <Route path="/collection-create" element={<CollectionNft />} exact />
+            <Route path="/nft-explore" element={<ExplorePage />} exact />
+            <Route path="/profile" element={<Profile />} exact />
+            <Route path="/nft-detail/:name" element={<MyNftDetail />} exact />
+            <Route path="/create-item" element={<CreateNewItem />} exact />
+            <Route path="nft-detail/resale/:id" element={<Resale />} exact />
+            <Route path="/collection/:name" element={<MyNftDetail />} exact />
+            <Route path="/contactUs" element={<ContactUs />} exact />
+            <Route path="/listing-application" element={<ListingApplication />} exact />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} exact />
+          </Routes>
+        </Suspense>
+        
+        <Footer />
+      </BrowserRouter>
+
+      <div className="color-toggle">
+        <ThemeSwitch />
+      </div>
+    </div>
+  );
+}
+
+export default App;

@@ -1,0 +1,6 @@
+.privateKeyModalSwap input {
+  border: 2px solid lightslategray;
+  border-radius: 0.2em;
+  padding: 0.1em 0.5em;
+  margin-bottom: 0.1em;
+}
