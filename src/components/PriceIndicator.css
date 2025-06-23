@@ -1,0 +1,333 @@
+/* DBX Price Indicator Component Styles */
+
+.price-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  transition: all 0.2s ease;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.price-indicator.clickable {
+  cursor: pointer;
+}
+
+.price-indicator.clickable:hover {
+  background: #e9ecef;
+  border-color: #0d6efd;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Size variants */
+.price-indicator-sm {
+  padding: 4px 8px;
+  font-size: 12px;
+  gap: 4px;
+}
+
+.price-indicator-md {
+  padding: 8px 12px;
+  font-size: 14px;
+  gap: 8px;
+}
+
+.price-indicator-lg {
+  padding: 12px 16px;
+  font-size: 16px;
+  gap: 12px;
+}
+
+/* Main price display */
+.price-main {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: #212529;
+}
+
+.price-icon {
+  width: 14px;
+  height: 14px;
+  color: #6c757d;
+}
+
+.price-indicator-sm .price-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.price-indicator-lg .price-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.price-value {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Price change indicators */
+.price-change {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.85em;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.price-change.positive {
+  color: #198754;
+  background: rgba(25, 135, 84, 0.1);
+}
+
+.price-change.negative {
+  color: #dc3545;
+  background: rgba(220, 53, 69, 0.1);
+}
+
+.price-change.neutral {
+  color: #6c757d;
+  background: rgba(108, 117, 125, 0.1);
+}
+
+.change-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.price-indicator-sm .change-icon {
+  width: 10px;
+  height: 10px;
+}
+
+.price-indicator-lg .change-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.change-value {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Price details (market cap, volume) */
+.price-details {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.detail-badge {
+  font-size: 0.7em;
+  padding: 2px 4px;
+  font-weight: 500;
+}
+
+.price-indicator-sm .detail-badge {
+  font-size: 0.6em;
+  padding: 1px 3px;
+}
+
+.price-indicator-lg .detail-badge {
+  font-size: 0.75em;
+  padding: 3px 6px;
+}
+
+/* Last updated timestamp */
+.price-updated {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #6c757d;
+  font-size: 0.7em;
+  margin-left: auto;
+}
+
+.refresh-icon {
+  width: 10px;
+  height: 10px;
+  opacity: 0.7;
+}
+
+/* Loading state */
+.price-indicator-loading {
+  background: #f8f9fa;
+  color: #6c757d;
+  border-color: #dee2e6;
+}
+
+.price-indicator-loading .spinner-border {
+  width: 14px;
+  height: 14px;
+  border-width: 2px;
+}
+
+.price-indicator-sm.price-indicator-loading .spinner-border {
+  width: 12px;
+  height: 12px;
+  border-width: 1px;
+}
+
+.price-indicator-lg.price-indicator-loading .spinner-border {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+/* Error state */
+.price-indicator-error {
+  background: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+.price-error {
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+/* Tooltip styles */
+.price-tooltip {
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.price-tooltip div {
+  margin-bottom: 2px;
+}
+
+.price-tooltip div:last-child {
+  margin-bottom: 0;
+}
+
+/* Animation for price updates */
+.price-value {
+  transition: color 0.3s ease;
+}
+
+.price-indicator.price-updated .price-value {
+  color: #0d6efd;
+  animation: priceFlash 0.5s ease;
+}
+
+@keyframes priceFlash {
+  0% { background: rgba(13, 110, 253, 0.2); }
+  100% { background: transparent; }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .price-indicator {
+    padding: 6px 8px;
+    font-size: 12px;
+    gap: 6px;
+  }
+  
+  .price-details {
+    display: none; /* Hide details on mobile to save space */
+  }
+  
+  .price-updated {
+    display: none; /* Hide timestamp on mobile */
+  }
+  
+  .price-change {
+    font-size: 0.8em;
+    padding: 1px 4px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .price-indicator {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+  }
+  
+  .price-indicator.clickable:hover {
+    background: #4a5568;
+    border-color: #90cdf4;
+  }
+  
+  .price-main {
+    color: #e2e8f0;
+  }
+  
+  .price-icon {
+    color: #a0aec0;
+  }
+  
+  .price-change.positive {
+    color: #68d391;
+    background: rgba(104, 211, 145, 0.1);
+  }
+  
+  .price-change.negative {
+    color: #fc8181;
+    background: rgba(252, 129, 129, 0.1);
+  }
+  
+  .price-change.neutral {
+    color: #a0aec0;
+    background: rgba(160, 174, 192, 0.1);
+  }
+  
+  .price-updated {
+    color: #a0aec0;
+  }
+  
+  .price-indicator-loading {
+    background: #2d3748;
+    color: #a0aec0;
+    border-color: #4a5568;
+  }
+  
+  .price-indicator-error {
+    background: #742a2a;
+    border-color: #9b2c2c;
+    color: #fed7d7;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .price-indicator {
+    border-width: 2px;
+    font-weight: 600;
+  }
+  
+  .price-change {
+    border: 1px solid currentColor;
+  }
+  
+  .detail-badge {
+    border: 1px solid currentColor;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .price-indicator,
+  .price-value,
+  .change-icon {
+    transition: none;
+  }
+  
+  .price-indicator.clickable:hover {
+    transform: none;
+  }
+  
+  @keyframes priceFlash {
+    0%, 100% { background: transparent; }
+  }
+}
+
