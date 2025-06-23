@@ -168,3 +168,19 @@ export const updateNetworkBalances = (network, balances) => {
     dispatch(setNetworkBalances(network, balances));
   };
 };
+
+/**
+ * Set wallet connection for a network
+ * @param {string} network - Network symbol
+ * @param {object} connectionData - Wallet connection data
+ */
+export const setWalletConnection = (network, connectionData) => {
+  return (dispatch) => {
+    dispatch(addConnectedNetwork(
+      network, 
+      connectionData.walletType || 'unknown',
+      connectionData.address || '',
+      connectionData
+    ));
+  };
+};
