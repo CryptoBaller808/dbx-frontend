@@ -1,0 +1,568 @@
+/* DBX Blockchain Tooltips Styles */
+
+/* Base Tooltip Styles */
+.blockchain-tooltip {
+  max-width: 350px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.blockchain-tooltip .tooltip-inner {
+  background: rgba(0, 0, 0, 0.95);
+  color: white;
+  border-radius: 8px;
+  padding: 12px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.blockchain-tooltip .tooltip-arrow::before {
+  border-color: rgba(0, 0, 0, 0.95) transparent;
+}
+
+/* Network Tooltip */
+.network-tooltip .tooltip-inner {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  max-width: 400px;
+}
+
+.network-tooltip-content .tooltip-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.network-tooltip-content .tooltip-body p {
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.network-tooltip-content .tooltip-stats {
+  font-size: 0.8rem;
+}
+
+.network-tooltip-content .tooltip-stats div {
+  margin-bottom: 4px;
+}
+
+.network-tooltip-content .tooltip-stats strong {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Token Tooltip */
+.token-tooltip .tooltip-inner {
+  background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+  max-width: 400px;
+}
+
+.token-tooltip-content .tooltip-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.token-tooltip-content .tooltip-body p {
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.token-tooltip-content .tooltip-stats {
+  font-size: 0.8rem;
+}
+
+.token-tooltip-content .tooltip-stats div {
+  margin-bottom: 4px;
+}
+
+.token-tooltip-content .tooltip-stats strong {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Help Tooltip */
+.help-tooltip .tooltip-inner {
+  background: rgba(40, 167, 69, 0.95);
+  max-width: 300px;
+}
+
+.help-tooltip .tooltip-arrow::before {
+  border-color: rgba(40, 167, 69, 0.95) transparent;
+}
+
+/* Risk Tooltip */
+.risk-tooltip .tooltip-inner {
+  max-width: 300px;
+}
+
+.risk-tooltip.risk-low .tooltip-inner {
+  background: rgba(40, 167, 69, 0.95);
+}
+
+.risk-tooltip.risk-medium .tooltip-inner {
+  background: rgba(255, 193, 7, 0.95);
+  color: #212529;
+}
+
+.risk-tooltip.risk-high .tooltip-inner {
+  background: rgba(220, 53, 69, 0.95);
+}
+
+.risk-content {
+  text-align: center;
+}
+
+.risk-content .badge {
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Tooltip Triggers */
+.network-tooltip-trigger,
+.token-tooltip-trigger,
+.interactive-info-trigger {
+  display: inline-flex;
+  align-items: center;
+  cursor: help;
+  transition: all 0.3s ease;
+}
+
+.network-tooltip-trigger:hover,
+.token-tooltip-trigger:hover,
+.interactive-info-trigger:hover {
+  opacity: 0.8;
+}
+
+.tooltip-icon,
+.info-icon,
+.help-icon {
+  font-size: 0.875rem;
+  color: #6c757d;
+  transition: all 0.3s ease;
+}
+
+.tooltip-icon:hover,
+.info-icon:hover,
+.help-icon:hover {
+  color: #007bff;
+  transform: scale(1.1);
+}
+
+.interactive-info-trigger .info-icon {
+  color: #17a2b8;
+}
+
+.interactive-info-trigger:hover .info-icon {
+  color: #138496;
+}
+
+/* Detailed Info Modal */
+.detailed-info-content {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.info-section {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 1rem;
+}
+
+.info-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.info-section h6 {
+  color: #495057;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.info-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-item strong {
+  color: #6c757d;
+  font-weight: 600;
+  flex: 0 0 40%;
+}
+
+.info-item span {
+  color: #495057;
+  text-align: right;
+  flex: 1;
+}
+
+/* Feature Tags */
+.feature-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.feature-tags .badge {
+  font-size: 0.75rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 12px;
+  border: 1px solid #007bff;
+  background: transparent;
+  color: #007bff;
+}
+
+/* Use Cases List */
+.use-cases-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.use-cases-list li {
+  margin-bottom: 0.5rem;
+  color: #495057;
+}
+
+.use-cases-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Pros and Cons Lists */
+.pros-list,
+.cons-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: none;
+}
+
+.pros-list li,
+.cons-list li {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.pros-list li:last-child,
+.cons-list li:last-child {
+  margin-bottom: 0;
+}
+
+.pros-list li {
+  color: #28a745;
+}
+
+.cons-list li {
+  color: #ffc107;
+}
+
+/* Info Links */
+.info-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.info-links .btn {
+  font-size: 0.875rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.info-links .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .blockchain-tooltip {
+    max-width: 280px;
+  }
+  
+  .network-tooltip .tooltip-inner,
+  .token-tooltip .tooltip-inner {
+    max-width: 300px;
+  }
+  
+  .detailed-info-content {
+    font-size: 0.85rem;
+  }
+  
+  .info-grid {
+    gap: 0.5rem;
+  }
+  
+  .info-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .info-item strong {
+    flex: none;
+  }
+  
+  .info-item span {
+    text-align: left;
+  }
+  
+  .info-links {
+    flex-direction: column;
+  }
+  
+  .info-links .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .blockchain-tooltip {
+    max-width: 250px;
+    font-size: 0.8rem;
+  }
+  
+  .network-tooltip .tooltip-inner,
+  .token-tooltip .tooltip-inner {
+    max-width: 250px;
+    padding: 10px 12px;
+  }
+  
+  .tooltip-icon,
+  .info-icon,
+  .help-icon {
+    font-size: 0.8rem;
+  }
+  
+  .feature-tags .badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .blockchain-tooltip .tooltip-inner {
+    background: rgba(52, 73, 94, 0.95);
+    color: #ecf0f1;
+  }
+  
+  .blockchain-tooltip .tooltip-arrow::before {
+    border-color: rgba(52, 73, 94, 0.95) transparent;
+  }
+  
+  .network-tooltip .tooltip-inner {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+  }
+  
+  .token-tooltip .tooltip-inner {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  }
+  
+  .help-tooltip .tooltip-inner {
+    background: rgba(46, 125, 50, 0.95);
+  }
+  
+  .detailed-info-content {
+    color: #ecf0f1;
+  }
+  
+  .info-section {
+    border-color: #4a5f7a;
+  }
+  
+  .info-section h6 {
+    color: #bdc3c7;
+  }
+  
+  .info-item {
+    border-color: #2c3e50;
+  }
+  
+  .info-item strong {
+    color: #95a5a6;
+  }
+  
+  .info-item span {
+    color: #ecf0f1;
+  }
+  
+  .use-cases-list li {
+    color: #bdc3c7;
+  }
+  
+  .feature-tags .badge {
+    border-color: #3498db;
+    color: #3498db;
+  }
+  
+  .tooltip-icon,
+  .info-icon,
+  .help-icon {
+    color: #95a5a6;
+  }
+  
+  .tooltip-icon:hover,
+  .info-icon:hover,
+  .help-icon:hover {
+    color: #3498db;
+  }
+  
+  .interactive-info-trigger .info-icon {
+    color: #3498db;
+  }
+  
+  .interactive-info-trigger:hover .info-icon {
+    color: #2980b9;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .blockchain-tooltip .tooltip-inner {
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+  }
+  
+  .tooltip-icon,
+  .info-icon,
+  .help-icon {
+    color: #000;
+  }
+  
+  .tooltip-icon:hover,
+  .info-icon:hover,
+  .help-icon:hover {
+    color: #0066cc;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .blockchain-tooltip .tooltip-inner {
+      background: #fff;
+      color: #000;
+      border: 2px solid #000;
+    }
+    
+    .tooltip-icon,
+    .info-icon,
+    .help-icon {
+      color: #fff;
+    }
+    
+    .tooltip-icon:hover,
+    .info-icon:hover,
+    .help-icon:hover {
+      color: #66ccff;
+    }
+  }
+}
+
+/* Animation Classes */
+.tooltip-fade-in {
+  animation: tooltipFadeIn 0.3s ease-out;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tooltip-bounce {
+  animation: tooltipBounce 0.5s ease-out;
+}
+
+@keyframes tooltipBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Accessibility */
+.tooltip-icon,
+.info-icon,
+.help-icon {
+  outline: none;
+}
+
+.tooltip-icon:focus,
+.info-icon:focus,
+.help-icon:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.network-tooltip-trigger:focus,
+.token-tooltip-trigger:focus,
+.interactive-info-trigger:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .tooltip-icon,
+  .info-icon,
+  .help-icon,
+  .network-tooltip-trigger,
+  .token-tooltip-trigger,
+  .interactive-info-trigger {
+    transition: none;
+  }
+  
+  .tooltip-icon:hover,
+  .info-icon:hover,
+  .help-icon:hover {
+    transform: none;
+  }
+  
+  .info-links .btn:hover {
+    transform: none;
+  }
+  
+  .tooltip-fade-in,
+  .tooltip-bounce {
+    animation: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .blockchain-tooltip,
+  .tooltip-icon,
+  .info-icon,
+  .help-icon {
+    display: none;
+  }
+}
+

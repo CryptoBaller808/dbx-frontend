@@ -1,0 +1,478 @@
+/* DBX Skeleton Loaders Styles */
+
+/* Base Skeleton Animation */
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+  display: block;
+}
+
+/* Trading Pair Skeleton */
+.trading-pair-skeleton .swap-section {
+  background: #f8f9fa;
+  border-radius: 16px;
+  padding: 20px;
+  border: 2px solid transparent;
+}
+
+.trading-pair-skeleton .amount-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Chart Skeleton */
+.chart-skeleton {
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+}
+
+.chart-skeleton .chart-header {
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 16px;
+}
+
+.chart-skeleton .chart-area {
+  padding-top: 16px;
+}
+
+/* Order Book Skeleton */
+.orderbook-skeleton {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+}
+
+.orderbook-skeleton .orderbook-header {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 8px;
+  font-weight: 600;
+  color: #6c757d;
+}
+
+.orderbook-skeleton .orderbook-row {
+  padding: 4px 0;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+/* Loading Grid Skeleton */
+.loading-grid-skeleton .grid-header {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 20px;
+}
+
+/* Table Skeleton */
+.table-skeleton .table-header {
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 12px;
+  font-weight: 600;
+}
+
+.table-skeleton .table-row {
+  padding: 8px 0;
+}
+
+/* Pulse Loader */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pulse-loader {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Shimmer Effect */
+.shimmer-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-container.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Loading Dots */
+.loading-dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.loading-dot {
+  border-radius: 50%;
+  animation: loadingDot 1.4s ease-in-out infinite both;
+}
+
+@keyframes loadingDot {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Skeleton Text */
+.skeleton-text .skeleton {
+  margin-bottom: 8px;
+}
+
+.skeleton-text .skeleton:last-child {
+  margin-bottom: 0;
+}
+
+/* Asset Card Skeleton Specific */
+.asset-card .skeleton {
+  background: linear-gradient(90deg, #f8f9fa 25%, #e9ecef 50%, #f8f9fa 75%);
+  background-size: 200% 100%;
+}
+
+/* NFT Card Skeleton Specific */
+.nft-card .nft-image-container .skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nft-card .nft-overlay .skeleton {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Transaction Skeleton Specific */
+.transaction-item .skeleton {
+  background: linear-gradient(90deg, #f8f9fa 25%, #e9ecef 50%, #f8f9fa 75%);
+  background-size: 200% 100%;
+}
+
+/* Portfolio Card Skeleton Specific */
+.portfolio-summary-card .skeleton,
+.portfolio-stats-card .skeleton {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.1) 75%);
+  background-size: 200% 100%;
+}
+
+/* Dark Mode Skeleton Styles */
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: linear-gradient(90deg, #2c3e50 25%, #34495e 50%, #2c3e50 75%);
+    background-size: 200% 100%;
+  }
+  
+  .asset-card .skeleton,
+  .transaction-item .skeleton {
+    background: linear-gradient(90deg, #2c3e50 25%, #34495e 50%, #2c3e50 75%);
+    background-size: 200% 100%;
+  }
+  
+  .chart-skeleton {
+    background: #34495e;
+    border-color: #4a5f7a;
+  }
+  
+  .chart-skeleton .chart-header {
+    border-color: #4a5f7a;
+  }
+  
+  .orderbook-skeleton .orderbook-header {
+    color: #bdc3c7;
+    border-color: #4a5f7a;
+  }
+  
+  .orderbook-skeleton .orderbook-row {
+    border-color: #2c3e50;
+  }
+  
+  .loading-grid-skeleton .grid-header {
+    border-color: #4a5f7a;
+  }
+  
+  .table-skeleton .table-header {
+    border-color: #4a5f7a;
+  }
+  
+  .shimmer-container.loading::after {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+  }
+}
+
+/* Responsive Skeleton Adjustments */
+@media (max-width: 768px) {
+  .skeleton {
+    animation-duration: 1.2s;
+  }
+  
+  .loading-grid-skeleton .grid-header {
+    margin-bottom: 20px;
+  }
+  
+  .chart-skeleton {
+    padding: 16px;
+  }
+  
+  .orderbook-skeleton {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .skeleton {
+    animation-duration: 1s;
+  }
+  
+  .chart-skeleton {
+    padding: 12px;
+  }
+  
+  .trading-pair-skeleton .swap-section {
+    padding: 16px;
+  }
+  
+  .loading-dots .loading-dot {
+    width: 6px !important;
+    height: 6px !important;
+  }
+  
+  .pulse-loader {
+    animation-duration: 1.2s;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton,
+  .pulse-loader,
+  .loading-dot,
+  .shimmer-container.loading::after {
+    animation: none;
+  }
+  
+  .skeleton {
+    background: #e9ecef;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .skeleton {
+      background: #34495e;
+    }
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .skeleton {
+    background: #d0d0d0;
+    border: 1px solid #999;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .skeleton {
+      background: #404040;
+      border: 1px solid #666;
+    }
+  }
+}
+
+/* Loading State Utilities */
+.loading-state {
+  pointer-events: none;
+  user-select: none;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  border-radius: inherit;
+}
+
+.loading-overlay.dark {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Skeleton Variants */
+.skeleton.rounded {
+  border-radius: 50%;
+}
+
+.skeleton.rounded-lg {
+  border-radius: 12px;
+}
+
+.skeleton.rounded-xl {
+  border-radius: 20px;
+}
+
+.skeleton.no-animation {
+  animation: none;
+  background: #e9ecef;
+}
+
+.skeleton.fast {
+  animation-duration: 1s;
+}
+
+.skeleton.slow {
+  animation-duration: 2s;
+}
+
+/* Skeleton Content Placeholders */
+.skeleton-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.skeleton-avatar.sm {
+  width: 24px;
+  height: 24px;
+}
+
+.skeleton-avatar.lg {
+  width: 64px;
+  height: 64px;
+}
+
+.skeleton-button {
+  height: 36px;
+  border-radius: 8px;
+  min-width: 80px;
+}
+
+.skeleton-button.sm {
+  height: 28px;
+  min-width: 60px;
+}
+
+.skeleton-button.lg {
+  height: 44px;
+  min-width: 100px;
+}
+
+.skeleton-input {
+  height: 40px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.skeleton-badge {
+  height: 20px;
+  border-radius: 10px;
+  min-width: 50px;
+}
+
+/* Loading States for Specific Components */
+.exchange-loading .trading-pair-card,
+.swap-loading .swap-card,
+.nft-loading .nft-card,
+.portfolio-loading .asset-card {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.exchange-loading .chart-placeholder,
+.swap-loading .exchange-info,
+.nft-loading .nft-image-container,
+.portfolio-loading .portfolio-summary-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.exchange-loading .chart-placeholder::after,
+.swap-loading .exchange-info::after,
+.nft-loading .nft-image-container::after,
+.portfolio-loading .portfolio-summary-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+/* Performance Optimizations */
+.skeleton,
+.pulse-loader,
+.loading-dot {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Print Styles */
+@media print {
+  .skeleton,
+  .pulse-loader,
+  .loading-dots,
+  .shimmer-container.loading::after {
+    display: none;
+  }
+}
+

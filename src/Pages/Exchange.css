@@ -1,0 +1,425 @@
+/* DBX Enhanced Exchange Page Styles */
+
+.exchange-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20px 0;
+}
+
+.exchange-header {
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.page-icon {
+  width: 32px;
+  height: 32px;
+  color: #007bff;
+}
+
+/* Trading Pair Selection */
+.trading-pair-card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.trading-pair-header {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.asset-selector-container {
+  gap: 1rem;
+}
+
+.asset-option {
+  padding: 0.5rem 0;
+}
+
+.asset-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.asset-info {
+  flex: 1;
+}
+
+.asset-symbol {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.asset-name {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.swap-assets-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #007bff;
+  background: white;
+  color: #007bff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.swap-assets-btn:hover:not(:disabled) {
+  background: #007bff;
+  color: white;
+  transform: rotate(180deg);
+}
+
+.swap-assets-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.loading-placeholder {
+  padding: 1rem;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+/* Chart Section */
+.chart-card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.chart-header {
+  border-bottom: 1px solid #e9ecef;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.change {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.market-stats .stat {
+  text-align: right;
+}
+
+.market-stats .stat small {
+  display: block;
+  font-size: 0.75rem;
+}
+
+.chart-placeholder {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+/* Order Book */
+.orderbook-card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.orderbook-container {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.orderbook-side {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+}
+
+.orderbook-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e9ecef;
+  font-weight: 600;
+  color: #6c757d;
+}
+
+.orderbook-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.orderbook-row:hover {
+  background: #f8f9fa;
+}
+
+.orderbook-placeholder {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+/* Trading Panel */
+.trading-panel {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  position: sticky;
+  top: 20px;
+}
+
+.trading-tabs {
+  margin-bottom: 1.5rem;
+}
+
+.trading-tabs .btn-group {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.trading-form .form-control {
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.trading-form .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.trading-form .btn {
+  padding: 0.75rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.trading-form .btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Wallet Balance */
+.wallet-balance-card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.balance-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.balance-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.balance-item:last-child {
+  border-bottom: none;
+}
+
+/* Account Orders */
+.account-orders .card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table th {
+  border-top: none;
+  font-weight: 600;
+  color: #6c757d;
+  font-size: 0.85rem;
+}
+
+.table td {
+  font-size: 0.85rem;
+  vertical-align: middle;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .exchange-page {
+    padding: 10px 0;
+  }
+  
+  .asset-selector-container {
+    flex-direction: column;
+  }
+  
+  .swap-assets-btn {
+    align-self: center;
+    margin: 1rem 0;
+  }
+  
+  .trading-interface {
+    flex-direction: column-reverse;
+  }
+  
+  .trading-panel {
+    position: static;
+    margin-bottom: 2rem;
+  }
+  
+  .orderbook-container {
+    max-height: 300px;
+  }
+  
+  .chart-placeholder {
+    min-height: 250px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-title h2 {
+    font-size: 1.5rem;
+  }
+  
+  .price {
+    font-size: 1.2rem;
+  }
+  
+  .orderbook-header,
+  .orderbook-row {
+    font-size: 0.75rem;
+  }
+  
+  .table {
+    font-size: 0.75rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .exchange-page {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: #ecf0f1;
+  }
+  
+  .card {
+    background: #34495e;
+    border-color: #4a5f7a;
+  }
+  
+  .form-control {
+    background: #2c3e50;
+    border-color: #4a5f7a;
+    color: #ecf0f1;
+  }
+  
+  .form-control:focus {
+    background: #2c3e50;
+    border-color: #3498db;
+    color: #ecf0f1;
+  }
+  
+  .chart-placeholder,
+  .orderbook-placeholder,
+  .loading-placeholder {
+    background: #2c3e50;
+    color: #bdc3c7;
+  }
+  
+  .table {
+    color: #ecf0f1;
+  }
+  
+  .table th {
+    color: #bdc3c7;
+  }
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Loading States */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
