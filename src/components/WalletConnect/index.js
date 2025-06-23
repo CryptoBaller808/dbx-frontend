@@ -23,14 +23,13 @@ const WalletConnect = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState({});
 
-  // Legacy support for XRP and XLM
-  if (network === 'xlm') {
-    return <XLM {...props} />;
-  } else if (network === 'xrp' || !network) {
-    return <XRP {...props} />;
-  }
-
+  // All hooks must be called at the top level - before any conditional returns
   useEffect(() => {
+    // Only initialize for non-legacy networks
+    if (network === 'xlm' || network === 'xrp' || !network) {
+      return; // Early return inside useEffect is allowed
+    }
+
     // Initialize wallet manager
     WalletManager.initialize();
     
@@ -49,7 +48,14 @@ const WalletConnect = (props) => {
       WalletManager.off('accountChanged', handleAccountChanged);
       WalletManager.off('networkChanged', handleNetworkChanged);
     };
-  }, []);
+  }, [network]); // Add network as dependency
+
+  // Legacy support for XRP and XLM - moved after all hooks
+  if (network === 'xlm') {
+    return <XLM {...props} />;
+  } else if (network === 'xrp' || !network) {
+    return <XRP {...props} />;
+  }
 
   const updateConnectionStatus = () => {
     const status = WalletManager.getConnectionStatus();
