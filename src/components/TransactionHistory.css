@@ -1,0 +1,410 @@
+/* DBX Transaction History Component Styles */
+
+.transaction-history {
+  width: 100%;
+}
+
+/* Statistics Card */
+.stats-card {
+  border: 1px solid #e3f2fd;
+  background: linear-gradient(135deg, #f8fdff 0%, #e3f2fd 100%);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 10px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1976d2;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* Filters Card */
+.filters-card {
+  border: 1px solid #dee2e6;
+}
+
+.filters-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 300px;
+}
+
+.filter-dropdowns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-dropdowns .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* Transactions Card */
+.transactions-card {
+  border: 1px solid #dee2e6;
+}
+
+.transactions-card .card-header {
+  background: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  padding: 16px 20px;
+}
+
+/* Loading and Empty States */
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: #6c757d;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+}
+
+.empty-state p {
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+}
+
+/* Transaction Table */
+.transactions-table {
+  margin-bottom: 0;
+}
+
+.transactions-table th {
+  background: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+  font-weight: 600;
+  color: #495057;
+  padding: 12px 16px;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.transactions-table td {
+  padding: 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.transaction-row:hover {
+  background: #f8f9fa;
+}
+
+/* Asset Cell */
+.asset-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.token-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f8f9fa;
+}
+
+.token-symbol {
+  font-weight: 600;
+  color: #212529;
+  font-size: 0.875rem;
+}
+
+.token-name {
+  font-size: 0.75rem;
+  color: #6c757d;
+}
+
+/* Amount Cell */
+.amount-cell {
+  text-align: left;
+}
+
+.amount {
+  font-weight: 600;
+  color: #212529;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.description {
+  font-size: 0.75rem;
+  color: #6c757d;
+  margin-top: 2px;
+}
+
+/* USD Value */
+.usd-value {
+  font-weight: 500;
+  color: #198754;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Badges */
+.type-badge {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.network-badge {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  font-weight: 500;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+/* Timestamp */
+.timestamp {
+  font-size: 0.875rem;
+  color: #6c757d;
+  white-space: nowrap;
+}
+
+/* Pagination */
+.pagination-info {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+/* Error State */
+.transaction-history-error {
+  margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .filters-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-input {
+    min-width: auto;
+  }
+  
+  .filter-dropdowns {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .stat-value {
+    font-size: 1.25rem;
+  }
+  
+  .transactions-table {
+    font-size: 0.875rem;
+  }
+  
+  .transactions-table th,
+  .transactions-table td {
+    padding: 8px 12px;
+  }
+  
+  .asset-cell {
+    gap: 8px;
+  }
+  
+  .token-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .token-symbol {
+    font-size: 0.8rem;
+  }
+  
+  .token-name {
+    font-size: 0.7rem;
+  }
+  
+  .amount {
+    font-size: 0.8rem;
+  }
+  
+  .description {
+    font-size: 0.7rem;
+  }
+  
+  .type-badge,
+  .network-badge,
+  .status-badge {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+  }
+  
+  .pagination-info {
+    font-size: 0.8rem;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  
+  .card-footer .d-flex {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Hide less important columns on mobile */
+  .transactions-table .d-none-mobile {
+    display: none;
+  }
+  
+  .transactions-table th:nth-child(4),
+  .transactions-table td:nth-child(4),
+  .transactions-table th:nth-child(7),
+  .transactions-table td:nth-child(7) {
+    display: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .stats-card {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    border-color: #4a5568;
+  }
+  
+  .stat-value {
+    color: #90cdf4;
+  }
+  
+  .stat-label {
+    color: #a0aec0;
+  }
+  
+  .filters-card,
+  .transactions-card {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+  
+  .transactions-card .card-header {
+    background: #4a5568;
+    border-color: #718096;
+  }
+  
+  .transactions-table th {
+    background: #4a5568;
+    color: #e2e8f0;
+    border-color: #718096;
+  }
+  
+  .transactions-table td {
+    border-color: #4a5568;
+    color: #e2e8f0;
+  }
+  
+  .transaction-row:hover {
+    background: #4a5568;
+  }
+  
+  .token-symbol {
+    color: #e2e8f0;
+  }
+  
+  .token-name {
+    color: #a0aec0;
+  }
+  
+  .amount {
+    color: #e2e8f0;
+  }
+  
+  .description {
+    color: #a0aec0;
+  }
+  
+  .timestamp {
+    color: #a0aec0;
+  }
+  
+  .pagination-info {
+    color: #a0aec0;
+  }
+  
+  .loading-container,
+  .empty-state {
+    color: #a0aec0;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .transactions-table {
+    border: 2px solid currentColor;
+  }
+  
+  .transactions-table th,
+  .transactions-table td {
+    border: 1px solid currentColor;
+  }
+  
+  .type-badge,
+  .network-badge,
+  .status-badge {
+    border: 1px solid currentColor;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .transaction-row {
+    transition: none;
+  }
+  
+  .stats-card {
+    background: #f8fdff;
+  }
+}
+
