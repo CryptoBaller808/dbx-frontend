@@ -7,7 +7,7 @@
  * @author DBX Development Team
  */
 
-import { SUPPORTED_NETWORKS } from '../config/networks';
+import { SUPPORTED_NETWORKS } from '../../config/networks';
 
 class MetaMaskAdapter {
   constructor() {

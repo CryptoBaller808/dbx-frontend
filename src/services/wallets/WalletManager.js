@@ -10,7 +10,7 @@ import MetaMaskAdapter from './MetaMaskAdapter';
 import PhantomAdapter from './PhantomAdapter';
 import XDCAdapter from './XDCAdapter';
 import BitcoinAdapter from './BitcoinAdapter';
-import { SUPPORTED_NETWORKS } from '../config/networks';
+import { SUPPORTED_NETWORKS } from '../../config/networks';
 
 class WalletManager {
   constructor() {
