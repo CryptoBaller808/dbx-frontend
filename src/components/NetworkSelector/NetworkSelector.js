@@ -1,297 +1,246 @@
-import React, { useState, useEffect } from 'react';
+/**
+ * DBX Network Selector Component
+ * 
+ * Advanced network selector with multi-chain support
+ * Allows users to switch between different blockchain networks seamlessly
+ * 
+ * @version 1.0.0
+ * @author DBX Development Team
+ */
+
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { 
-  selectSupportedNetworks, 
-  selectActiveNetwork, 
-  selectNetworkConfig,
-  selectIsChainConnected,
-  selectIsNetworkSwitching 
-} from '../../redux/multiChainWallet/reducer';
-import { switchToNetwork, setActiveNetwork } from '../../redux/multiChainWallet/actions';
+  setNetwork, 
+  setNetworkType, 
+  switchNetwork 
+} from '../../redux/network/action';
+import { 
+  SUPPORTED_NETWORKS, 
+  getNetworksSorted, 
+  getNetworkBySymbol,
+  NETWORK_TYPES 
+} from '../../config/networks';
 import './NetworkSelector.css';
 
 /**
- * Dynamic Network Selector Component
- * Beautiful, intuitive network switching with visual indicators
+ * Network Selector Component
  */
 const NetworkSelector = ({ 
-  onNetworkChange, 
-  showConnectedOnly = false,
-  variant = 'dropdown', // 'dropdown', 'tabs', 'grid'
-  size = 'medium' // 'small', 'medium', 'large'
+  className = '', 
+  showTestnets = false, 
+  compact = false,
+  onNetworkChange = null 
 }) => {
   const dispatch = useDispatch();
+  const dropdownRef = useRef(null);
+  
+  // Redux state
+  const { 
+    activeNetwork, 
+    networkType, 
+    connectedNetworks, 
+    networkStatus,
+    preferences 
+  } = useSelector(state => state.networkReducers);
+  
+  // Component state
   const [isOpen, setIsOpen] = useState(false);
-  const [hoveredNetwork, setHoveredNetwork] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredNetworks, setFilteredNetworks] = useState([]);
+
+  // Get current network configuration
+  const currentNetwork = getNetworkBySymbol(activeNetwork);
   
-  const supportedNetworks = useSelector(selectSupportedNetworks);
-  const activeNetwork = useSelector(selectActiveNetwork);
-  const isNetworkSwitching = useSelector(selectIsNetworkSwitching);
-  
-  // Get network configurations and connection status
-  const networks = supportedNetworks.map(chainId => ({
-    chainId,
-    config: useSelector(state => selectNetworkConfig(state, chainId)),
-    isConnected: useSelector(state => selectIsChainConnected(state, chainId))
-  })).filter(network => !showConnectedOnly || network.isConnected);
-  
-  const activeNetworkConfig = useSelector(state => selectNetworkConfig(state, activeNetwork));
-  
-  const handleNetworkSelect = async (chainId) => {
-    try {
-      setIsOpen(false);
+  // Filter networks based on search and preferences
+  useEffect(() => {
+    const networks = Object.entries(getNetworksSorted());
+    const filtered = networks.filter(([symbol, network]) => {
+      const matchesSearch = network.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           symbol.toLowerCase().includes(searchTerm.toLowerCase());
       
-      if (chainId === activeNetwork) return;
+      // Show testnets based on preference
+      const showNetwork = showTestnets || preferences.showTestnets || true;
       
-      // Dispatch network switch action
-      await dispatch(switchToNetwork(chainId));
+      return matchesSearch && showNetwork;
+    });
+    
+    setFilteredNetworks(filtered);
+  }, [searchTerm, showTestnets, preferences.showTestnets]);
+
+  // Handle network selection
+  const handleNetworkSelect = (networkSymbol) => {
+    if (networkSymbol !== activeNetwork) {
+      dispatch(switchNetwork(networkSymbol, networkType));
       
-      // Call parent callback if provided
+      // Call external callback if provided
       if (onNetworkChange) {
-        onNetworkChange(chainId);
+        onNetworkChange(networkSymbol);
       }
-    } catch (error) {
-      console.error('Failed to switch network:', error);
     }
+    setIsOpen(false);
+    setSearchTerm('');
   };
-  
-  const handleKeyDown = (event, chainId) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      handleNetworkSelect(chainId);
-    }
+
+  // Handle network type toggle
+  const handleNetworkTypeToggle = () => {
+    const newType = networkType === NETWORK_TYPES.MAINNET 
+      ? NETWORK_TYPES.TESTNET 
+      : NETWORK_TYPES.MAINNET;
+    dispatch(setNetworkType(newType));
   };
-  
-  // Dropdown variant
-  if (variant === 'dropdown') {
-    return (
-      <div className={`network-selector network-selector--${size}`}>
-        <button
-          className={`network-selector__trigger ${isOpen ? 'network-selector__trigger--open' : ''}`}
-          onClick={() => setIsOpen(!isOpen)}
-          disabled={isNetworkSwitching}
-          aria-expanded={isOpen}
-          aria-haspopup="listbox"
-        >
-          <div className="network-selector__current">
-            {activeNetworkConfig ? (
-              <>
-                <span 
-                  className="network-selector__icon"
-                  style={{ color: activeNetworkConfig.color }}
-                >
-                  {activeNetworkConfig.icon}
-                </span>
-                <span className="network-selector__name">
-                  {activeNetworkConfig.name}
-                </span>
-                <span className="network-selector__symbol">
-                  {activeNetworkConfig.symbol}
-                </span>
-              </>
-            ) : (
-              <span className="network-selector__placeholder">
-                Select Network
-              </span>
-            )}
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+        setSearchTerm('');
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Get connection status for network
+  const getConnectionStatus = (networkSymbol) => {
+    return connectedNetworks[networkSymbol]?.connected || false;
+  };
+
+  // Get network status indicator
+  const getStatusIndicator = (networkSymbol) => {
+    const status = networkStatus[networkSymbol];
+    const isConnected = getConnectionStatus(networkSymbol);
+    
+    if (status === 'connecting') return 'connecting';
+    if (status === 'error') return 'error';
+    if (isConnected) return 'connected';
+    return 'disconnected';
+  };
+
+  return (
+    <div className={`network-selector ${className}`} ref={dropdownRef}>
+      {/* Current Network Display */}
+      <div 
+        className={`network-selector-trigger ${compact ? 'compact' : ''} ${isOpen ? 'open' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <div className="network-info">
+          <div className="network-icon">
+            <img 
+              src={currentNetwork?.ui?.icon || '/images/networks/default.png'} 
+              alt={currentNetwork?.name || 'Network'} 
+              onError={(e) => {
+                e.target.src = '/images/networks/default.png';
+              }}
+            />
+            <div className={`status-indicator ${getStatusIndicator(activeNetwork)}`} />
           </div>
           
-          {isNetworkSwitching ? (
-            <div className="network-selector__loading">
-              <div className="spinner"></div>
+          {!compact && (
+            <div className="network-details">
+              <div className="network-name">{currentNetwork?.displayName || activeNetwork}</div>
+              <div className="network-type">{networkType}</div>
             </div>
-          ) : (
-            <svg 
-              className={`network-selector__arrow ${isOpen ? 'network-selector__arrow--up' : ''}`}
-              width="12" 
-              height="12" 
-              viewBox="0 0 12 12"
-            >
-              <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-            </svg>
           )}
-        </button>
+        </div>
         
-        {isOpen && (
-          <div className="network-selector__dropdown">
-            <div className="network-selector__list" role="listbox">
-              {networks.map(({ chainId, config, isConnected }) => (
-                <button
-                  key={chainId}
-                  className={`network-selector__option ${
-                    chainId === activeNetwork ? 'network-selector__option--active' : ''
-                  } ${
-                    isConnected ? 'network-selector__option--connected' : ''
-                  }`}
-                  onClick={() => handleNetworkSelect(chainId)}
-                  onKeyDown={(e) => handleKeyDown(e, chainId)}
-                  onMouseEnter={() => setHoveredNetwork(chainId)}
-                  onMouseLeave={() => setHoveredNetwork(null)}
-                  role="option"
-                  aria-selected={chainId === activeNetwork}
+        <div className="dropdown-arrow">
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+            <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      {/* Dropdown Menu */}
+      {isOpen && (
+        <div className="network-selector-dropdown">
+          {/* Search Input */}
+          <div className="network-search">
+            <input
+              type="text"
+              placeholder="Search networks..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="search-input"
+            />
+          </div>
+
+          {/* Network Type Toggle */}
+          <div className="network-type-toggle">
+            <button
+              className={`type-button ${networkType === NETWORK_TYPES.MAINNET ? 'active' : ''}`}
+              onClick={() => dispatch(setNetworkType(NETWORK_TYPES.MAINNET))}
+            >
+              Mainnet
+            </button>
+            <button
+              className={`type-button ${networkType === NETWORK_TYPES.TESTNET ? 'active' : ''}`}
+              onClick={() => dispatch(setNetworkType(NETWORK_TYPES.TESTNET))}
+            >
+              Testnet
+            </button>
+          </div>
+
+          {/* Network List */}
+          <div className="network-list">
+            {filteredNetworks.map(([symbol, network]) => {
+              const isActive = symbol === activeNetwork;
+              const isConnected = getConnectionStatus(symbol);
+              const status = getStatusIndicator(symbol);
+              
+              return (
+                <div
+                  key={symbol}
+                  className={`network-item ${isActive ? 'active' : ''} ${status}`}
+                  onClick={() => handleNetworkSelect(symbol)}
                 >
-                  <div className="network-selector__option-content">
-                    <span 
-                      className="network-selector__icon"
-                      style={{ color: config.color }}
-                    >
-                      {config.icon}
-                    </span>
-                    <div className="network-selector__option-text">
-                      <span className="network-selector__name">
-                        {config.name}
-                      </span>
-                      <span className="network-selector__symbol">
-                        {config.symbol}
-                      </span>
-                    </div>
+                  <div className="network-item-icon">
+                    <img 
+                      src={network.ui.icon} 
+                      alt={network.name}
+                      onError={(e) => {
+                        e.target.src = '/images/networks/default.png';
+                      }}
+                    />
+                    <div className={`status-indicator ${status}`} />
                   </div>
                   
-                  <div className="network-selector__option-status">
+                  <div className="network-item-info">
+                    <div className="network-item-name">{network.displayName}</div>
+                    <div className="network-item-symbol">{symbol}</div>
+                  </div>
+                  
+                  <div className="network-item-status">
                     {isConnected && (
-                      <div className="network-selector__connected-indicator">
-                        <div className="network-selector__connected-dot"></div>
-                        <span>Connected</span>
-                      </div>
+                      <div className="connected-badge">Connected</div>
                     )}
-                    
-                    {chainId === activeNetwork && (
-                      <svg 
-                        className="network-selector__check"
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 16 16"
-                      >
-                        <path 
-                          d="M13.5 4.5L6 12L2.5 8.5" 
-                          stroke="currentColor" 
-                          strokeWidth="2" 
-                          fill="none"
-                        />
-                      </svg>
+                    {status === 'connecting' && (
+                      <div className="connecting-spinner" />
+                    )}
+                    {status === 'error' && (
+                      <div className="error-badge">Error</div>
                     )}
                   </div>
-                </button>
-              ))}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Footer */}
+          <div className="network-selector-footer">
+            <div className="network-count">
+              {filteredNetworks.length} networks available
+            </div>
+            <div className="network-type-indicator">
+              {networkType}
             </div>
           </div>
-        )}
-      </div>
-    );
-  }
-  
-  // Tabs variant
-  if (variant === 'tabs') {
-    return (
-      <div className={`network-selector-tabs network-selector-tabs--${size}`}>
-        <div className="network-selector-tabs__list" role="tablist">
-          {networks.map(({ chainId, config, isConnected }) => (
-            <button
-              key={chainId}
-              className={`network-selector-tabs__tab ${
-                chainId === activeNetwork ? 'network-selector-tabs__tab--active' : ''
-              } ${
-                isConnected ? 'network-selector-tabs__tab--connected' : ''
-              }`}
-              onClick={() => handleNetworkSelect(chainId)}
-              disabled={isNetworkSwitching}
-              role="tab"
-              aria-selected={chainId === activeNetwork}
-            >
-              <span 
-                className="network-selector-tabs__icon"
-                style={{ color: config.color }}
-              >
-                {config.icon}
-              </span>
-              <span className="network-selector-tabs__name">
-                {config.name}
-              </span>
-              {isConnected && (
-                <div className="network-selector-tabs__connected-dot"></div>
-              )}
-            </button>
-          ))}
         </div>
-        
-        {isNetworkSwitching && (
-          <div className="network-selector-tabs__loading">
-            <div className="spinner"></div>
-            <span>Switching network...</span>
-          </div>
-        )}
-      </div>
-    );
-  }
-  
-  // Grid variant
-  if (variant === 'grid') {
-    return (
-      <div className={`network-selector-grid network-selector-grid--${size}`}>
-        <div className="network-selector-grid__list">
-          {networks.map(({ chainId, config, isConnected }) => (
-            <button
-              key={chainId}
-              className={`network-selector-grid__item ${
-                chainId === activeNetwork ? 'network-selector-grid__item--active' : ''
-              } ${
-                isConnected ? 'network-selector-grid__item--connected' : ''
-              }`}
-              onClick={() => handleNetworkSelect(chainId)}
-              disabled={isNetworkSwitching}
-              onMouseEnter={() => setHoveredNetwork(chainId)}
-              onMouseLeave={() => setHoveredNetwork(null)}
-            >
-              <div className="network-selector-grid__content">
-                <span 
-                  className="network-selector-grid__icon"
-                  style={{ color: config.color }}
-                >
-                  {config.icon}
-                </span>
-                <span className="network-selector-grid__name">
-                  {config.name}
-                </span>
-                <span className="network-selector-grid__symbol">
-                  {config.symbol}
-                </span>
-              </div>
-              
-              {isConnected && (
-                <div className="network-selector-grid__connected-indicator">
-                  <div className="network-selector-grid__connected-dot"></div>
-                </div>
-              )}
-              
-              {chainId === activeNetwork && (
-                <div className="network-selector-grid__active-indicator">
-                  <svg width="16" height="16" viewBox="0 0 16 16">
-                    <path 
-                      d="M13.5 4.5L6 12L2.5 8.5" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      fill="none"
-                    />
-                  </svg>
-                </div>
-              )}
-            </button>
-          ))}
-        </div>
-        
-        {isNetworkSwitching && (
-          <div className="network-selector-grid__loading-overlay">
-            <div className="network-selector-grid__loading">
-              <div className="spinner"></div>
-              <span>Switching network...</span>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
-  
-  return null;
+      )}
+    </div>
+  );
 };
 
 export default NetworkSelector;
