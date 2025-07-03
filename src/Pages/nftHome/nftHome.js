@@ -14,6 +14,8 @@ import { EllipsisOutlined, ArrowLeftOutlined, ArrowRightOutlined, FilterOutlined
 import { SUPPORTED_NETWORKS } from '../../config/networks';
 import { switchNetwork } from '../../redux/network/action';
 import NetworkSelector from '../../components/NetworkSelector';
+// Import NFT category icons
+import { AllNftIcon, ArtNftIcon, MusicNftIcon, MotionNftIcon, SportsNftIcon } from '../../Icons';
 import './nftHome.css';
 
 const { TabPane } = Tabs;
@@ -467,6 +469,85 @@ const EnhancedNFTHome = () => {
                       <Badge bg={networkType === 'mainnet' ? 'success' : 'warning'}>
                         {networkType.toUpperCase()}
                       </Badge>
+                    </div>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+
+        {/* NFT Categories */}
+        <Row className="mb-4">
+          <Col>
+            <Card className="category-card">
+              <Card.Body>
+                <h5 className="mb-3">Browse by Category</h5>
+                <Row className="category-tabs">
+                  <Col md={2} sm={4} xs={6} className="mb-3">
+                    <div 
+                      className={`category-item ${categoryFilter === 'all' ? 'active' : ''}`}
+                      onClick={() => setCategoryFilter('all')}
+                    >
+                      <div className="category-icon">
+                        <AllNftIcon />
+                      </div>
+                      <span className="category-label">All NFTs</span>
+                    </div>
+                  </Col>
+                  <Col md={2} sm={4} xs={6} className="mb-3">
+                    <div 
+                      className={`category-item ${categoryFilter === 'Art' ? 'active' : ''}`}
+                      onClick={() => setCategoryFilter('Art')}
+                    >
+                      <div className="category-icon">
+                        <ArtNftIcon />
+                      </div>
+                      <span className="category-label">Art</span>
+                    </div>
+                  </Col>
+                  <Col md={2} sm={4} xs={6} className="mb-3">
+                    <div 
+                      className={`category-item ${categoryFilter === 'Music' ? 'active' : ''}`}
+                      onClick={() => setCategoryFilter('Music')}
+                    >
+                      <div className="category-icon">
+                        <MusicNftIcon />
+                      </div>
+                      <span className="category-label">Music</span>
+                    </div>
+                  </Col>
+                  <Col md={2} sm={4} xs={6} className="mb-3">
+                    <div 
+                      className={`category-item ${categoryFilter === 'Gaming' ? 'active' : ''}`}
+                      onClick={() => setCategoryFilter('Gaming')}
+                    >
+                      <div className="category-icon">
+                        <MotionNftIcon />
+                      </div>
+                      <span className="category-label">Gaming</span>
+                    </div>
+                  </Col>
+                  <Col md={2} sm={4} xs={6} className="mb-3">
+                    <div 
+                      className={`category-item ${categoryFilter === 'Sports' ? 'active' : ''}`}
+                      onClick={() => setCategoryFilter('Sports')}
+                    >
+                      <div className="category-icon">
+                        <SportsNftIcon />
+                      </div>
+                      <span className="category-label">Sports</span>
+                    </div>
+                  </Col>
+                  <Col md={2} sm={4} xs={6} className="mb-3">
+                    <div 
+                      className={`category-item ${categoryFilter === 'Collectibles' ? 'active' : ''}`}
+                      onClick={() => setCategoryFilter('Collectibles')}
+                    >
+                      <div className="category-icon">
+                        <AllNftIcon />
+                      </div>
+                      <span className="category-label">Collectibles</span>
                     </div>
                   </Col>
                 </Row>

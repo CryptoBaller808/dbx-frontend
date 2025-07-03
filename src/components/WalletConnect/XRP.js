@@ -12,15 +12,17 @@ import XummLogo from "../../Images/XummLogo.png";
 import LegerLogo from "../../Images/XRPLLogo.png";
 import setAuthToken from "../../redux/actions/setHeaderToken";
 import { toast } from "react-toastify";
+
 const WalletConnect = ({ open, setOpen }) => {
   const socket = useSocket();
   const dispatch = useDispatch();
-  const [loading, setloading] = useState();
+  const [loading, setloading] = useState(false);
   const [xumppres, setxumppres] = useState("");
   const QRCodeResponse = useSelector(state => state.QRCodeReducer.QRcode);
   const [xummUrlMobile, setXummUrlMobile] = useState();
-
   const [qRCodeImage, setQRCodeImage] = useState(QRCodeResponse);
+  const [connectionError, setConnectionError] = useState(null);
+  const [connectionTimeout, setConnectionTimeout] = useState(null);
 
   useEffect(() => {
     if (open) {
@@ -28,44 +30,115 @@ const WalletConnect = ({ open, setOpen }) => {
     } else {
       document.body.style.overflow = "auto";
     }
-  }, []);
+
+    // Cleanup on unmount
+    return () => {
+      if (connectionTimeout) {
+        clearTimeout(connectionTimeout);
+      }
+    };
+  }, [open, connectionTimeout]);
+
+  // Reset states when modal opens
+  useEffect(() => {
+    if (open) {
+      setConnectionError(null);
+      setloading(false);
+    }
+  }, [open]);
 
   const connectXumppwallet = async () => {
-    setloading(true);
-    socket.emit("xumm-qr-code");
-    if (qRCodeImage == null) {
-      socket.on("qr-response", args => {
-        console.log("qr-response", args);
-        dispatch(QRCodeAction.setQRCode(args));
-        setQRCodeImage(args);
-      });
-    }
+    try {
+      setloading(true);
+      setConnectionError(null);
+      
+      // Set a timeout for the connection attempt
+      const timeout = setTimeout(() => {
+        setloading(false);
+        setConnectionError("Connection timeout. Please try again.");
+        toast.error("Connection timeout. Please try again.");
+      }, 30000); // 30 seconds timeout
+      
+      setConnectionTimeout(timeout);
 
-    socket.on("qr-app-response", args => {
-      console.log("qr app resp", args);
-      const decodedPayload = decodeURIComponent(args);
-      setXummUrlMobile(decodedPayload);
-      console.log("decoded payload", decodedPayload);
-    });
-
-    socket.on("account-response", args => {
-      console.log("account-responsee", args);
-
-      if (args?.success) {
-        dispatch(balanceAction.setBalance(args));
-        setxumppres(args);
-        Verifywallet(args.account, args?.userToken);
-        if (args) {
-          dispatch(connectWallet(true));
-        }
+      socket.emit("xumm-qr-code");
+      
+      if (qRCodeImage == null) {
+        socket.on("qr-response", args => {
+          console.log("qr-response", args);
+          if (args) {
+            dispatch(QRCodeAction.setQRCode(args));
+            setQRCodeImage(args);
+            setloading(false); // Stop loading when QR code is received
+          } else {
+            setloading(false);
+            setConnectionError("Failed to generate QR code");
+            toast.error("Failed to generate QR code");
+          }
+        });
       } else {
-        toast.error("Wallet connect request rejected.");
+        setloading(false); // QR code already exists
       }
 
-      setOpen(false);
-    });
+      socket.on("qr-app-response", args => {
+        console.log("qr app resp", args);
+        try {
+          const decodedPayload = decodeURIComponent(args);
+          setXummUrlMobile(decodedPayload);
+          console.log("decoded payload", decodedPayload);
+        } catch (error) {
+          console.error("Error decoding XUMM URL:", error);
+          setConnectionError("Error processing XUMM app link");
+        }
+      });
 
-    socket.on("connection");
+      socket.on("account-response", args => {
+        console.log("account-responsee", args);
+        
+        // Clear timeout when we get a response
+        if (connectionTimeout) {
+          clearTimeout(connectionTimeout);
+          setConnectionTimeout(null);
+        }
+        
+        setloading(false);
+
+        if (args?.success) {
+          dispatch(balanceAction.setBalance(args));
+          setxumppres(args);
+          Verifywallet(args.account, args?.userToken);
+          if (args) {
+            dispatch(connectWallet(true));
+          }
+        } else {
+          setConnectionError("Wallet connection request was rejected");
+          toast.error("Wallet connect request rejected.");
+        }
+      });
+
+      // Handle socket connection errors
+      socket.on("connect_error", (error) => {
+        console.error("Socket connection error:", error);
+        setloading(false);
+        setConnectionError("Connection error. Please check your internet connection.");
+        toast.error("Connection error. Please try again.");
+        if (connectionTimeout) {
+          clearTimeout(connectionTimeout);
+          setConnectionTimeout(null);
+        }
+      });
+
+      socket.on("connection");
+    } catch (error) {
+      console.error("Error connecting to XUMM:", error);
+      setloading(false);
+      setConnectionError("Failed to connect to XUMM wallet");
+      toast.error("Failed to connect to XUMM wallet");
+      if (connectionTimeout) {
+        clearTimeout(connectionTimeout);
+        setConnectionTimeout(null);
+      }
+    }
   };
 
   const Verifywallet = async (wallet, userToken) => {
@@ -77,12 +150,15 @@ const WalletConnect = ({ open, setOpen }) => {
         usertoken: userToken,
       });
       console.log("Verifywallet res22", res);
+      
       if (res?.data == "User Haven't resolved the sign in request yet.") {
-        return alert("Please scan qr code through xumpp app");
+        setConnectionError("Please scan QR code through XUMM app");
+        return;
       } else {
         dispatch(connectWallet(true));
         setOpen(false);
       }
+      
       let data = res?.data;
 
       if (res) {
@@ -99,7 +175,28 @@ const WalletConnect = ({ open, setOpen }) => {
         });
         setOpen(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error verifying wallet:", error);
+      setConnectionError("Failed to verify wallet connection");
+      toast.error("Failed to verify wallet connection");
+    }
+  };
+
+  const handleRetry = () => {
+    setConnectionError(null);
+    setQRCodeImage(null);
+    dispatch(QRCodeAction.setQRCode(null));
+    connectXumppwallet();
+  };
+
+  const handleClose = () => {
+    if (connectionTimeout) {
+      clearTimeout(connectionTimeout);
+      setConnectionTimeout(null);
+    }
+    setloading(false);
+    setConnectionError(null);
+    setOpen(false);
   };
 
   return (
@@ -109,11 +206,21 @@ const WalletConnect = ({ open, setOpen }) => {
           <>
             <div className="hdr flex aic">
               <div className="lbl">Connect using XUMM</div>
-              <div className="ico flex aic jc pointer" onClick={e => setOpen(false)}>
+              <div className="ico flex aic jc pointer" onClick={handleClose}>
                 <CrossIcon />
               </div>
             </div>
             <div className="desc">Scan QR code to connect</div>
+            
+            {connectionError && (
+              <div className="error-message" style={{ color: 'red', padding: '10px', textAlign: 'center' }}>
+                {connectionError}
+                <button onClick={handleRetry} style={{ marginLeft: '10px', padding: '5px 10px' }}>
+                  Retry
+                </button>
+              </div>
+            )}
+            
             <div className="action flex flex-col">
               <div className="avil-wallet flex flex-col aic jc">
                 <div className="btn flex aic jc">
@@ -121,20 +228,13 @@ const WalletConnect = ({ open, setOpen }) => {
                   <p className="lbl flex aic">QR scanned?</p>
                 </div>
               </div>
-              {/* <div className="new-wallet flex flex-col aic jc">
-                <div className="qt-lbl"></div>
-                <div onClick={Verifywallet} className="btn button">
-                  QR scanned?
-                </div>
-              </div> */}
               <div className="new-wallet flex flex-col aic jc">
                 <div className="qt-lbl"></div>
-                {/* <div onClick={Verifywallet} className="btn button">
-                  Qr scanned ?
-                </div> */}
-                <a href={`${xummUrlMobile}`} target="_blank" className="btn button">
-                  Open XUMM App
-                </a>
+                {xummUrlMobile && (
+                  <a href={`${xummUrlMobile}`} target="_blank" rel="noopener noreferrer" className="btn button">
+                    Open XUMM App
+                  </a>
+                )}
               </div>
             </div>
           </>
@@ -142,42 +242,46 @@ const WalletConnect = ({ open, setOpen }) => {
           <>
             <div className="hdr flex aic">
               <div className="lbl"></div>
-              <div className="ico flex aic jc pointer" onClick={e => setOpen(false)}>
+              <div className="ico flex aic jc pointer" onClick={handleClose}>
                 <CrossIcon />
               </div>
             </div>
             <div className="desc headss">Select a Wallet</div>
+            
+            {connectionError && (
+              <div className="error-message" style={{ color: 'red', padding: '10px', textAlign: 'center' }}>
+                {connectionError}
+                <button onClick={handleRetry} style={{ marginLeft: '10px', padding: '5px 10px' }}>
+                  Retry
+                </button>
+              </div>
+            )}
+            
             <div className="action flex flex-col">
               <div className="avil-wallet flex flex-col aic jc">
-                <div class="field flex input-search">
-                  <input type="text" class="txt search" placeholder="Search name or paste address" value="" />
+                <div className="field flex input-search">
+                  <input type="text" className="txt search" placeholder="Search name or paste address" value="" />
                 </div>
                 <div
                   onClick={() => {
-                    connectXumppwallet();
+                    if (!loading) {
+                      connectXumppwallet();
+                    }
                   }}
-                  className="btn flex aic jc">
+                  className={`btn flex aic jc ${loading ? 'loading' : ''}`}
+                  style={{ opacity: loading ? 0.7 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
+                >
                   <img
                     src={XummLogo}
                     className="img flex aic"
                     alt="xumm logo"
                     style={{ width: "40px", height: "40px", marginRight: "5px" }}
                   />
-                  <p className="lbl  aic">
-                    {loading ? "loading..." : "XUMM App"}
-                    {/*<small>XUMM App</small>*/}
+                  <p className="lbl aic">
+                    {loading ? "Connecting..." : "XUMM App"}
                   </p>
                 </div>
-                {/* <div className="btn flex aic jc">
-                  <img src={LegerLogo} className="img flex aic" alt="leger logo" style={{width:"40px", height: "40px", marginRight: "5px" }} />
-                  <p className="lbl  aic">XRP <small>XRP</small></p>
-                  <p className="lbl  aic">Ledger Device</p>
-                </div> */}
               </div>
-              {/* <div className="new-wallet flex flex-col aic jc">
-                <div className="qt-lbl">Don’t have a wallet?</div>
-                <div className="btn button">Create New Wallet</div>
-              </div> */}
             </div>
           </>
         )}
