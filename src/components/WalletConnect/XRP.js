@@ -52,72 +52,32 @@ const WalletConnect = ({ open, setOpen }) => {
       setloading(true);
       setConnectionError(null);
       
-      // Clear any existing timeout
-      if (connectionTimeout) {
-        clearTimeout(connectionTimeout);
-      }
-      
       // Set a timeout for the connection attempt
       const timeout = setTimeout(() => {
         setloading(false);
-        setConnectionError("Connection timeout. Please try again or check your internet connection.");
+        setConnectionError("Connection timeout. Please try again.");
         toast.error("Connection timeout. Please try again.");
-        
-        // Clean up socket listeners
-        socket.off("qr-response");
-        socket.off("qr-app-response");
-        socket.off("account-response");
-        socket.off("connect_error");
-      }, 15000); // Reduced to 15 seconds for better UX
+      }, 30000); // 30 seconds timeout
       
       setConnectionTimeout(timeout);
-
-      // Clean up any existing listeners before adding new ones
-      socket.off("qr-response");
-      socket.off("qr-app-response");
-      socket.off("account-response");
-      socket.off("connect_error");
 
       socket.emit("xumm-qr-code");
       
       if (qRCodeImage == null) {
         socket.on("qr-response", args => {
           console.log("qr-response", args);
-          
-          // Clear timeout when we get QR code
-          if (connectionTimeout) {
-            clearTimeout(connectionTimeout);
-            setConnectionTimeout(null);
-          }
-          
           if (args) {
             dispatch(QRCodeAction.setQRCode(args));
             setQRCodeImage(args);
-            setloading(false);
-            
-            // Set a new timeout for QR code scanning
-            const scanTimeout = setTimeout(() => {
-              setConnectionError("QR code scan timeout. Please try again.");
-              toast.error("QR code scan timeout. Please try again.");
-            }, 60000); // 60 seconds for QR scanning
-            
-            setConnectionTimeout(scanTimeout);
+            setloading(false); // Stop loading when QR code is received
           } else {
             setloading(false);
-            setConnectionError("Failed to generate QR code. Please try again.");
+            setConnectionError("Failed to generate QR code");
             toast.error("Failed to generate QR code");
           }
         });
       } else {
-        setloading(false);
-        
-        // If QR code already exists, set timeout for scanning
-        const scanTimeout = setTimeout(() => {
-          setConnectionError("QR code scan timeout. Please try again.");
-          toast.error("QR code scan timeout. Please try again.");
-        }, 60000);
-        
-        setConnectionTimeout(scanTimeout);
+        setloading(false); // QR code already exists
       }
 
       socket.on("qr-app-response", args => {
@@ -129,7 +89,6 @@ const WalletConnect = ({ open, setOpen }) => {
         } catch (error) {
           console.error("Error decoding XUMM URL:", error);
           setConnectionError("Error processing XUMM app link");
-          toast.error("Error processing XUMM app link");
         }
       });
 
@@ -139,47 +98,6 @@ const WalletConnect = ({ open, setOpen }) => {
         // Clear timeout when we get a response
         if (connectionTimeout) {
           clearTimeout(connectionTimeout);
-          setConnectionTimeout(null);
-        }
-        
-        setloading(false);
-
-        if (args?.success) {
-          dispatch(balanceAction.setBalance(args));
-          setxumppres(args);
-          Verifywallet(args.account, args?.userToken);
-          if (args) {
-            dispatch(connectWallet(true));
-          }
-        } else {
-          setConnectionError("Wallet connection request was rejected or failed");
-          toast.error("Wallet connect request rejected or failed.");
-        }
-      });
-
-      // Handle socket connection errors
-      socket.on("connect_error", (error) => {
-        console.error("Socket connection error:", error);
-        setloading(false);
-        setConnectionError("Connection error. Please check your internet connection and try again.");
-        toast.error("Connection error. Please try again.");
-        if (connectionTimeout) {
-          clearTimeout(connectionTimeout);
-          setConnectionTimeout(null);
-        }
-      });
-
-    } catch (error) {
-      console.error("Error connecting to XUMM:", error);
-      setloading(false);
-      setConnectionError("Failed to connect to XUMM wallet. Please try again.");
-      toast.error("Failed to connect to XUMM wallet");
-      if (connectionTimeout) {
-        clearTimeout(connectionTimeout);
-        setConnectionTimeout(null);
-      }
-    }
-  };
           setConnectionTimeout(null);
         }
         
