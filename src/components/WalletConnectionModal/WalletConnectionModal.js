@@ -13,6 +13,7 @@ import {
   clearWalletError,
   getAvailableWallets
 } from '../../redux/multiChainWallet/actions';
+import WalletErrorBoundary from '../ErrorBoundary/WalletErrorBoundary';
 import './WalletConnectionModal.css';
 
 /**
@@ -320,9 +321,11 @@ const WalletConnectionModal = ({
           </svg>
         </button>
         
-        <div className="wallet-modal__content">
-          {getStepContent()}
-        </div>
+        <WalletErrorBoundary>
+          <div className="wallet-modal__content">
+            {getStepContent()}
+          </div>
+        </WalletErrorBoundary>
       </div>
     </div>
   );

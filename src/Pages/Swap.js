@@ -156,15 +156,30 @@ const Swap = () => {
 
   // Network switching handler
   const handleNetworkSwitch = (type, network) => {
+    console.log(`Network switch: ${type} -> ${network}`);
+    
+    if (!network) {
+      console.warn('No network provided to handleNetworkSwitch');
+      return;
+    }
+    
     if (type === 'from') {
+      console.log(`Setting fromNetwork from ${fromNetwork} to ${network}`);
       setFromNetwork(network);
       setFromToken("");
-    } else {
+    } else if (type === 'to') {
+      console.log(`Setting toNetwork from ${toNetwork} to ${network}`);
       setToNetwork(network);
       setToToken("");
+    } else {
+      console.error('Invalid network switch type:', type);
+      return;
     }
+    
+    // Reset calculated values
     setExchangeRate(null);
     setToAmount("");
+    setError(""); // Clear any previous errors
   };
 
   // Swap networks
@@ -240,12 +255,18 @@ const Swap = () => {
                   <Row>
                     <Col md={6}>
                       <Select
-                        value={networkOptions.find(opt => opt.value === fromNetwork)}
-                        onChange={(option) => handleNetworkSwitch('from', option.value)}
+                        key={`from-network-${fromNetwork}`}
+                        value={networkOptions.find(opt => opt.value === fromNetwork) || null}
+                        onChange={(option) => {
+                          console.log('FROM network changed to:', option);
+                          handleNetworkSwitch('from', option?.value);
+                        }}
                         options={networkOptions}
                         components={{ Option: NetworkOption }}
                         placeholder="Select network..."
                         className="mb-2"
+                        isClearable={false}
+                        isSearchable={false}
                       />
                     </Col>
                     <Col md={6}>
@@ -284,12 +305,18 @@ const Swap = () => {
                   <Row>
                     <Col md={6}>
                       <Select
-                        value={networkOptions.find(opt => opt.value === toNetwork)}
-                        onChange={(option) => handleNetworkSwitch('to', option.value)}
+                        key={`to-network-${toNetwork}`}
+                        value={networkOptions.find(opt => opt.value === toNetwork) || null}
+                        onChange={(option) => {
+                          console.log('TO network changed to:', option);
+                          handleNetworkSwitch('to', option?.value);
+                        }}
                         options={networkOptions}
                         components={{ Option: NetworkOption }}
                         placeholder="Select network..."
                         className="mb-2"
+                        isClearable={false}
+                        isSearchable={false}
                       />
                     </Col>
                     <Col md={6}>

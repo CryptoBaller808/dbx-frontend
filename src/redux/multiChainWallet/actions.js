@@ -205,24 +205,53 @@ export const connectToWallet = (chainId, walletType, options = {}) => async (dis
     dispatch(setWalletLoading(true, `connecting_${chainId}`));
     dispatch(clearWalletError(chainId));
     
-    const { connectWallet } = await import('../../api/executers/wallet');
+    // Use frontend-only wallet implementation
+    const { connectWallet } = await import('../../api/executers/wallet-frontend');
     
     const response = await connectWallet(chainId, walletType, options);
     
     if (response.success) {
       dispatch(setWalletConnection(chainId, response.data));
       
-      // Fetch balance after successful connection
-      dispatch(fetchChainBalance(chainId));
+      // Fetch balance after successful connection (if balance fetching is available)
+      try {
+        dispatch(fetchChainBalance(chainId));
+      } catch (balanceError) {
+        console.warn(`Could not fetch balance for ${chainId}:`, balanceError);
+        // Don't fail the connection if balance fetching fails
+      }
+    } else {
+      // Handle structured error response
+      const errorMessage = response.error?.message || 'Failed to connect wallet';
+      dispatch(setWalletError(errorMessage, chainId));
     }
     
     dispatch(setWalletLoading(false));
     return response;
   } catch (error) {
     console.error(`Failed to connect to ${walletType} on ${chainId}:`, error);
-    dispatch(setWalletError(error.message, chainId));
+    
+    // Provide user-friendly error messages
+    let userMessage = error.message;
+    if (error.message.includes('not installed')) {
+      userMessage = `${walletType} wallet is not installed. Please install it to continue.`;
+    } else if (error.message.includes('not connected')) {
+      userMessage = `Please unlock your ${walletType} wallet and try again.`;
+    } else if (error.message.includes('rejected')) {
+      userMessage = 'Connection was rejected. Please try again.';
+    }
+    
+    dispatch(setWalletError(userMessage, chainId));
     dispatch(setWalletLoading(false));
-    throw error;
+    
+    // Return error response instead of throwing to prevent crashes
+    return {
+      success: false,
+      error: {
+        message: userMessage,
+        originalError: error.message
+      }
+    };
   }
 };
 

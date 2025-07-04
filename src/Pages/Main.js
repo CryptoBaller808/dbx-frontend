@@ -136,6 +136,8 @@ const handleGetBanner = async (type) => {
     }
   } catch (error) {
     console.error("Failed to load banner:", error);
+    // Set a default banner or hide banner section when API fails
+    setbanner(null); // This will hide the loading state
   }
 };
 
@@ -154,8 +156,7 @@ const handleGetBanner = async (type) => {
       ) : (
         <></>
       )} */}
-      <div> 
-        {banner ? (
+      <div>          {banner ? (
             banner.endsWith("mp4") ? (
               <div>
                 <video
@@ -170,7 +171,13 @@ const handleGetBanner = async (type) => {
               <img src={banner} alt="Banner" className="h-[430px] w-full" />
             )
           ) : (
-            <div>Loading...</div> // Show loading state while banner is being fetched
+            // Hide banner section when API fails or no banner available
+            <div className="h-[200px] bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+              <div className="text-white text-center">
+                <h2 className="text-3xl font-bold mb-2">Welcome to DBX NFT Marketplace</h2>
+                <p className="text-lg">Discover, collect, and trade unique digital assets</p>
+              </div>
+            </div>
           )}
       </div>
       <div className="container flex">
