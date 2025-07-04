@@ -210,7 +210,11 @@ const Exchange = ({ isDarkMode }) => {
                 <GraphHeadComponent />
               </Card.Header>
               <Card.Body>
-                <Chart />
+                <Chart 
+                  selectedFromAsset={selectedFromAsset}
+                  selectedToAsset={selectedToAsset}
+                  isDarkMode={isDarkMode}
+                />
               </Card.Body>
             </Card>
 

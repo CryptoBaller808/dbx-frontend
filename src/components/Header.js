@@ -7,6 +7,7 @@ import Modal from "./Modal";
 import WalletConnect from "./WalletConnect";
 import { useSelector, useDispatch } from "react-redux";
 import { setModalOpen } from "../redux/actions";
+import { setToken } from "../redux/network/action";
 import DisconnectModal from "./Modal/DisconnectModal";
 import TokenListDropDown from "./TokenListDropDown";
 
@@ -64,6 +65,15 @@ const Header = ({ openSidebar, setOpenSidebar, setSelectedToken }) => {
     setOpen(true);
     //}
   };
+
+  const handleNetworkSelection = (selectedNetwork) => {
+    // Update local state
+    if (setSelectedToken) {
+      setSelectedToken(selectedNetwork);
+    }
+    // Update global Redux state
+    dispatch(setToken(selectedNetwork.value));
+  };
   return (
     <div className="header-cmp flex items-center">
       <div className="wrapWidth wrap flex items-center">
@@ -107,7 +117,7 @@ const Header = ({ openSidebar, setOpenSidebar, setSelectedToken }) => {
             <h1 style={{ color: "white" }}>{user?.firstname ? user?.firstname : "No name"}</h1>
           )} */}
           <div className="token-selection flex items-center">
-            <TokenListDropDown network={network} setSelectedValue={setSelectedToken} />
+            <TokenListDropDown network={network} setSelectedValue={handleNetworkSelection} />
           </div>
           {isWalletConnected ? (
             balance?.success ? (

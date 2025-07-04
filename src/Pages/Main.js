@@ -188,8 +188,8 @@ const handleGetBanner = async (type) => {
                   }}
                   key={i}
                   className="tab-item flex aic">
-                  <img src={item.icon} className="icon" />
-                  <div className="tag">{item.category_name}</div>
+                  <img src={item.ico} className="icon" />
+                  <div className="tag">{item.lbl}</div>
                 </div>
               ))}
             </div>
